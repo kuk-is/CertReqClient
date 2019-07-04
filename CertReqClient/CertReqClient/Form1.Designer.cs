@@ -46,6 +46,7 @@
             this.textBox_Keysize = new System.Windows.Forms.TextBox();
             this.btn_generate = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.lbl_error_required_field = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_common_name
@@ -53,9 +54,9 @@
             this.label_common_name.AutoSize = true;
             this.label_common_name.Location = new System.Drawing.Point(81, 108);
             this.label_common_name.Name = "label_common_name";
-            this.label_common_name.Size = new System.Drawing.Size(82, 13);
+            this.label_common_name.Size = new System.Drawing.Size(46, 13);
             this.label_common_name.TabIndex = 0;
-            this.label_common_name.Text = "Common Name:";
+            this.label_common_name.Text = "Domain:";
             // 
             // textBox_commonName
             // 
@@ -204,11 +205,21 @@
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             // 
+            // lbl_error_required_field
+            // 
+            this.lbl_error_required_field.AutoSize = true;
+            this.lbl_error_required_field.Location = new System.Drawing.Point(120, 564);
+            this.lbl_error_required_field.Name = "lbl_error_required_field";
+            this.lbl_error_required_field.Size = new System.Drawing.Size(39, 13);
+            this.lbl_error_required_field.TabIndex = 19;
+            this.lbl_error_required_field.Text = "Fehler:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 613);
+            this.Controls.Add(this.lbl_error_required_field);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_generate);
             this.Controls.Add(this.textBox_Keysize);
@@ -255,6 +266,7 @@
         private System.Windows.Forms.TextBox textBox_Keysize;
         private System.Windows.Forms.Button btn_generate;
         private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.Label lbl_error_required_field;
     }
 }
 

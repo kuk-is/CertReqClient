@@ -1,10 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Prng;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Pkcs;
-using Org.BouncyCastle.Security;
+﻿using CERTENROLLLib;
 using System;
 using System.IO;
 using System.Text;
@@ -35,49 +29,75 @@ namespace CertReqClient
         {
             string commonName = textBox_commonName.Text;
             string SubjectAlternativeNames = textbox_alternativeNames.Text;
-            string Organization = textbox_organization.Text;
-            string Department = textBox_Department.Text;
-            string City = textBox_City.Text;
-            string State = textBox_State.Text;
-            string Country = textBox_Country.Text;
+            string organization = textbox_organization.Text;
+            string department = textBox_Department.Text;
+            string city = textBox_City.Text;
+            string state = textBox_State.Text;
+            string country = textBox_Country.Text;
             string Keysize = textBox_Keysize.Text;
 
-            
-            var subjectName = "CN=www.copanyName.com,O=Company Name,OU=Department,T=Area,ST=State,C=Country";
-
-            // create new Object for Issuer and Subject
-            var issuer = new X509Name(subjectName);
-            var subject = new X509Name(subjectName);
-
-            // generate the key Value Pair, which in our case is a public Key
-            var randomGenerator = new CryptoApiRandomGenerator();
-            var random = new SecureRandom(randomGenerator);
-            AsymmetricCipherKeyPair subjectKeyPair = default(AsymmetricCipherKeyPair);
-            const int strength = 2048;
-            var keyGenerationParameters = new KeyGenerationParameters(random, strength);
-
-            var keyPairGenerator = new RsaKeyPairGenerator();
-            keyPairGenerator.Init(keyGenerationParameters);
-            subjectKeyPair = keyPairGenerator.GenerateKeyPair();
-            AsymmetricCipherKeyPair issuerKeyPair = subjectKeyPair;
-
-            // PKCS #10 Certificate Signing Request
-            Pkcs10CertificationRequest csr = new Pkcs10CertificationRequest("SHA1WITHRSA", subject, issuerKeyPair.Public, null, issuerKeyPair.Private);
-
-            // convert BouncyCastle CSR to .PEM file.
-            StringBuilder CSRPem = new StringBuilder();
-            PemWriter CSRPemWriter = new PemWriter(new StringWriter(CSRPem));
-            CSRPemWriter.WriteObject(csr);
-            CSRPemWriter.Writer.Flush();
-
-            // get CSR text
-            var CSRtext = CSRPem.ToString();
-
-            // write content into text file
-            using (StreamWriter f = new StreamWriter(@"C:\Cert_TEST\DemoCSR.txt"))
+            string CreateCertRequestMessage()
             {
-                f.Write(CSRtext);
+                var objCSPs = new CCspInformations();
+                objCSPs.AddAvailableCsps();
+
+                var objPrivateKey = new CX509PrivateKey();
+                objPrivateKey.Length = 2048;
+                objPrivateKey.KeySpec = X509KeySpec.XCN_AT_SIGNATURE;
+                objPrivateKey.KeyUsage = X509PrivateKeyUsageFlags.XCN_NCRYPT_ALLOW_ALL_USAGES;
+                objPrivateKey.MachineContext = false;
+                objPrivateKey.ExportPolicy = X509PrivateKeyExportFlags.XCN_NCRYPT_ALLOW_EXPORT_FLAG;
+                objPrivateKey.CspInformations = objCSPs;
+                objPrivateKey.Create();
+
+                var objPkcs10 = new CX509CertificateRequestPkcs10();
+                objPkcs10.InitializeFromPrivateKey(
+                    X509CertificateEnrollmentContext.ContextUser,
+                    objPrivateKey,
+                    string.Empty);
+
+                var objExtensionKeyUsage = new CX509ExtensionKeyUsage();
+                objExtensionKeyUsage.InitializeEncode(
+                    CERTENROLLLib.X509KeyUsageFlags.XCN_CERT_DIGITAL_SIGNATURE_KEY_USAGE |
+                    CERTENROLLLib.X509KeyUsageFlags.XCN_CERT_NON_REPUDIATION_KEY_USAGE |
+                    CERTENROLLLib.X509KeyUsageFlags.XCN_CERT_KEY_ENCIPHERMENT_KEY_USAGE |
+                    CERTENROLLLib.X509KeyUsageFlags.XCN_CERT_DATA_ENCIPHERMENT_KEY_USAGE);
+                objPkcs10.X509Extensions.Add((CX509Extension)objExtensionKeyUsage);
+
+                var objObjectId = new CObjectId();
+                var objObjectIds = new CObjectIds();
+                var objX509ExtensionEnhancedKeyUsage = new CX509ExtensionEnhancedKeyUsage();
+                objObjectId.InitializeFromValue("1.3.6.1.5.5.7.3.2");
+                objObjectIds.Add(objObjectId);
+                objX509ExtensionEnhancedKeyUsage.InitializeEncode(objObjectIds);
+                objPkcs10.X509Extensions.Add((CX509Extension)objX509ExtensionEnhancedKeyUsage);
+
+                var objDN = new CX500DistinguishedName();
+                //var subjectName = "CN = shaunxu.me, OU = ADCS, O = Blog, L = Beijng, S = Beijing, C = CN";
+                var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
+                objDN.Encode(subjectName, X500NameFlags.XCN_CERT_NAME_STR_NONE);
+                objPkcs10.Subject = objDN;
+
+                var objEnroll = new CX509Enrollment();
+                objEnroll.InitializeFromRequest(objPkcs10);
+                var strRequest = objEnroll.CreateRequest(EncodingType.XCN_CRYPT_STRING_BASE64);
+                return strRequest;
+            }
+
+
+            // create text file and save in folder
+            string path = @"c:\Cert_TEST\myCerti.txt";
+            using (FileStream fs = File.Create(path))
+            {
+                string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
+                string certEnd   = "-----END CERTIFICATE REQUEST-----";
+                string fullText  = certBegin + CreateCertRequestMessage() + certEnd;
+
+                Byte[] info = new UTF8Encoding(true).GetBytes(fullText);
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
             }
         }
     }
 }
+
