@@ -40,10 +40,8 @@
             this.textBox_City = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.textBox_State = new System.Windows.Forms.TextBox();
             this.textBox_Country = new System.Windows.Forms.TextBox();
-            this.textBox_Keysize = new System.Windows.Forms.TextBox();
             this.btn_generate = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.lbl_error_required_field = new System.Windows.Forms.Label();
@@ -52,7 +50,7 @@
             // label_common_name
             // 
             this.label_common_name.AutoSize = true;
-            this.label_common_name.Location = new System.Drawing.Point(81, 108);
+            this.label_common_name.Location = new System.Drawing.Point(117, 108);
             this.label_common_name.Name = "label_common_name";
             this.label_common_name.Size = new System.Drawing.Size(46, 13);
             this.label_common_name.TabIndex = 0;
@@ -74,7 +72,6 @@
             this.textbox_alternative_names.Size = new System.Drawing.Size(135, 13);
             this.textbox_alternative_names.TabIndex = 2;
             this.textbox_alternative_names.Text = "Subject Alternative Names:";
-            this.textbox_alternative_names.Click += new System.EventHandler(this.label1_Click);
             // 
             // textbox_alternativeNames
             // 
@@ -153,15 +150,6 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Country:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(117, 457);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Keysize:";
-            // 
             // textBox_State
             // 
             this.textBox_State.Location = new System.Drawing.Point(185, 371);
@@ -178,17 +166,9 @@
             this.textBox_Country.Size = new System.Drawing.Size(217, 26);
             this.textBox_Country.TabIndex = 15;
             // 
-            // textBox_Keysize
-            // 
-            this.textBox_Keysize.Location = new System.Drawing.Point(185, 454);
-            this.textBox_Keysize.Multiline = true;
-            this.textBox_Keysize.Name = "textBox_Keysize";
-            this.textBox_Keysize.Size = new System.Drawing.Size(217, 26);
-            this.textBox_Keysize.TabIndex = 16;
-            // 
             // btn_generate
             // 
-            this.btn_generate.Location = new System.Drawing.Point(185, 505);
+            this.btn_generate.Location = new System.Drawing.Point(185, 470);
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(93, 31);
             this.btn_generate.TabIndex = 17;
@@ -198,7 +178,7 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(309, 505);
+            this.btn_cancel.Location = new System.Drawing.Point(309, 470);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(93, 31);
             this.btn_cancel.TabIndex = 18;
@@ -210,9 +190,8 @@
             this.lbl_error_required_field.AutoSize = true;
             this.lbl_error_required_field.Location = new System.Drawing.Point(120, 564);
             this.lbl_error_required_field.Name = "lbl_error_required_field";
-            this.lbl_error_required_field.Size = new System.Drawing.Size(39, 13);
+            this.lbl_error_required_field.Size = new System.Drawing.Size(0, 13);
             this.lbl_error_required_field.TabIndex = 19;
-            this.lbl_error_required_field.Text = "Fehler:";
             // 
             // Form1
             // 
@@ -222,10 +201,8 @@
             this.Controls.Add(this.lbl_error_required_field);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_generate);
-            this.Controls.Add(this.textBox_Keysize);
             this.Controls.Add(this.textBox_Country);
             this.Controls.Add(this.textBox_State);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_City);
@@ -260,10 +237,8 @@
         private System.Windows.Forms.TextBox textBox_City;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_State;
         private System.Windows.Forms.TextBox textBox_Country;
-        private System.Windows.Forms.TextBox textBox_Keysize;
         private System.Windows.Forms.Button btn_generate;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Label lbl_error_required_field;
