@@ -18,7 +18,7 @@ namespace CertReqClient
 
 
         
-        // creating set methods
+        // creating setter methods
         public void setCommonName(string commonName)
         {
             this.commonName = commonName;
