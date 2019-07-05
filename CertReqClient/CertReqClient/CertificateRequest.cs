@@ -1,9 +1,7 @@
 ﻿using CERTENROLLLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CertReqClient
 {
@@ -17,8 +15,9 @@ namespace CertReqClient
         private string city;
         private string state;
         private string country;
-        
 
+
+        
         // creating set methods
         public void setCommonName(string commonName)
         {
@@ -53,6 +52,25 @@ namespace CertReqClient
         public void setCountry(string country)
         {
             this.country = country;
+        }
+
+
+
+        // method to create request file
+        public void createRequestFile(string request) {
+
+            string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
+            string certEnd = "-----END CERTIFICATE REQUEST-----";
+            string fullRequest = certBegin + request + certEnd;
+
+            // create text file and save in folder
+            string path = @"c:\Cert_TEST\myCerti.txt";
+            using (FileStream fs = File.Create(path))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes(fullRequest);
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
         }
 
 

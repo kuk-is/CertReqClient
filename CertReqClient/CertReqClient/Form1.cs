@@ -24,27 +24,16 @@ namespace CertReqClient
         {
             CertificateRequest myRequest = new CertificateRequest();
 
-            // 
             myRequest.setCommonName(textBox_commonName.Text);
-            myRequest.setCommonName(textbox_alternativeNames.Text);
-            myRequest.setCommonName(textbox_organization.Text);
-            myRequest.setCommonName(textBox_Department.Text);
-            myRequest.setCommonName(textBox_City.Text);
-            myRequest.setCommonName(textBox_State.Text);
-            myRequest.setCommonName(textBox_Country.Text);
-
-            string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
-            string certEnd = "-----END CERTIFICATE REQUEST-----";
-            string fullRequest = certBegin + myRequest.generateCertificateRequest() + certEnd;
-
-            // create text file and save in folder
-            string path = @"c:\Cert_TEST\myCerti.txt";
-            using (FileStream fs = File.Create(path))
-            {
-                Byte[] info = new UTF8Encoding(true).GetBytes(fullRequest);
-                // Add some information to the file.
-                fs.Write(info, 0, info.Length);
-            }
+            myRequest.setSubjectAlternativeNames(textbox_alternativeNames.Text);
+            myRequest.setOrganization(textbox_organization.Text);
+            myRequest.setDepartment(textBox_Department.Text);
+            myRequest.setCity(textBox_City.Text);
+            myRequest.setState(textBox_State.Text);
+            myRequest.setCountry(textBox_Country.Text);
+            
+            // calling method to create request file
+            myRequest.createRequestFile(myRequest.generateCertificateRequest());         
         }
     }
 }
