@@ -64,7 +64,7 @@ namespace CertReqClient
             string fullRequest = certBegin + request + certEnd;
 
             // create text file and save in folder
-            string path = @"c:\Cert_TEST\myCerti.txt";
+            string path = @"c:\Cert_TEST\newCertificate.txt";
             using (FileStream fs = File.Create(path))
             {
                 Byte[] info = new UTF8Encoding(true).GetBytes(fullRequest);

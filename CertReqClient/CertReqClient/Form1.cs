@@ -1,15 +1,16 @@
 ﻿using CERTENROLLLib;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
 namespace CertReqClient
 {
-    public partial class Form1 : Form
+    public partial class lblname : Form
     {
        
-        public Form1()
+        public lblname()
         {
             InitializeComponent();
             
@@ -31,9 +32,17 @@ namespace CertReqClient
             myRequest.setCity(textBox_City.Text);
             myRequest.setState(textBox_State.Text);
             myRequest.setCountry(textBox_Country.Text);
-            
+
             // calling method to create request file
-            myRequest.createRequestFile(myRequest.generateCertificateRequest());         
+            myRequest.createRequestFile(myRequest.generateCertificateRequest());
+
+
+            /////////////////////// CONSOLE ////////////////////////
+            certreqConsole myConsole = new certreqConsole();
+
+            // calling method for console commands
+            myConsole.submitCertificate();
+            myConsole.acceptCertificate();
         }
     }
 }
