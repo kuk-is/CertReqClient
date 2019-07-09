@@ -46,6 +46,9 @@
             this.btn_cancel = new System.Windows.Forms.Button();
             this.lbl_error_required_field = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox_country = new System.Windows.Forms.ComboBox();
+            this.label_country = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_common_name
@@ -169,17 +172,17 @@
             // 
             // btn_generate
             // 
-            this.btn_generate.Location = new System.Drawing.Point(185, 470);
+            this.btn_generate.Location = new System.Drawing.Point(185, 510);
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(93, 31);
             this.btn_generate.TabIndex = 17;
             this.btn_generate.Text = "Generate";
             this.btn_generate.UseVisualStyleBackColor = true;
-            this.btn_generate.Click += new System.EventHandler(this.btn_generate_Click);
+            this.btn_generate.Click += new System.EventHandler(this.Btn_generate_Click);
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(309, 470);
+            this.btn_cancel.Location = new System.Drawing.Point(309, 510);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(93, 31);
             this.btn_cancel.TabIndex = 18;
@@ -202,11 +205,40 @@
             this.label4.Size = new System.Drawing.Size(0, 13);
             this.label4.TabIndex = 20;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(117, 463);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Country2:";
+            // 
+            // comboBox_country
+            // 
+            this.comboBox_country.FormattingEnabled = true;
+            this.comboBox_country.Location = new System.Drawing.Point(185, 454);
+            this.comboBox_country.Name = "comboBox_country";
+            this.comboBox_country.Size = new System.Drawing.Size(217, 21);
+            this.comboBox_country.TabIndex = 22;
+            // 
+            // label_country
+            // 
+            this.label_country.AutoSize = true;
+            this.label_country.Location = new System.Drawing.Point(31, 541);
+            this.label_country.Name = "label_country";
+            this.label_country.Size = new System.Drawing.Size(35, 13);
+            this.label_country.TabIndex = 23;
+            this.label_country.Text = "label6";
+            // 
             // lblname
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 613);
+            this.Controls.Add(this.label_country);
+            this.Controls.Add(this.comboBox_country);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_error_required_field);
             this.Controls.Add(this.btn_cancel);
@@ -253,6 +285,9 @@
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Label lbl_error_required_field;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox_country;
+        private System.Windows.Forms.Label label_country;
     }
 }
 

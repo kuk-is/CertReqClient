@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CertReqClient
 {
-    class certreqConsole
+    class CertreqConsole
     {
-        public void submitCertificate() {
+        // running CL and submitting certificate
+        public void SubmitCertificate() {
 
             Process Pro = new Process();
 
@@ -21,7 +22,8 @@ namespace CertReqClient
             Console.ReadLine();
         }
 
-        public void acceptCertificate() { 
+        // running CL and installing certificate
+        public void AcceptCertificate() { 
 
             Process P = new Process();
 
