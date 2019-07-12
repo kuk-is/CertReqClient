@@ -24,32 +24,32 @@ namespace CertReqClient
             this.commonName = commonName;
         }
 
-        public void setSubjectAlternativeNames(string subjectAlternativeNames)
+        public void SetSubjectAlternativeNames(string subjectAlternativeNames)
         {
             this.subjectAlternativeNames = subjectAlternativeNames;
         }
 
-        public void setOrganization(string organization)
+        public void SetOrganization(string organization)
         {
             this.organization = organization;
         }
 
-        public void setDepartment(string department)
+        public void SetDepartment(string department)
         {
             this.department = department;
         }
 
-        public void setCity(string city)
+        public void SetCity(string city)
         {
             this.city = city;
         }
 
-        public void setState(string state)
+        public void SetState(string state)
         {
             this.state = state;
         }
 
-        public void setCountry(string country)
+        public void SetCountry(string country)
         {
             this.country = country;
         }
@@ -57,14 +57,14 @@ namespace CertReqClient
 
 
         // method to create request file
-        public void createRequestFile(string request) {
+        public void CreateRequestFile(string request) {
 
             string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
             string certEnd = "-----END CERTIFICATE REQUEST-----";
             string fullRequest = certBegin + request + certEnd;
 
             // create text file and save in folder
-            string path = @"c:\Cert_TEST\myCerti.txt";
+            string path = @"c:\Cert_TEST\newCertificate.txt";
             using (FileStream fs = File.Create(path))
             {
                 Byte[] info = new UTF8Encoding(true).GetBytes(fullRequest);
@@ -74,8 +74,8 @@ namespace CertReqClient
         }
 
 
-
-        public string generateCertificateRequest()
+        // code for encrypting the request
+        public string GenerateCertificateRequest()
         {
             var objCSPs = new CCspInformations();
             objCSPs.AddAvailableCsps();
