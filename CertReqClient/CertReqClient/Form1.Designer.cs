@@ -176,7 +176,7 @@
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(93, 31);
             this.btn_generate.TabIndex = 17;
-            this.btn_generate.Text = "Generate";
+            this.btn_generate.Text = "create request";
             this.btn_generate.UseVisualStyleBackColor = true;
             this.btn_generate.Click += new System.EventHandler(this.Btn_generate_Click);
             // 

@@ -12,12 +12,13 @@ namespace CertReqClient
 {
     public partial class lblname : Form
     {
-        List<string> list = new List<string>();
+        public lblname()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
             // filling the combobox
             comboBox_country.DisplayMember = "Text";
             comboBox_country.ValueMember = "Value";
@@ -27,9 +28,7 @@ namespace CertReqClient
             foreach (CultureInfo culture in cultures)
             {
                 RegionInfo region = new RegionInfo(culture.Name);
-                comboBox_country.Items.Add(new { Text = $"{region.EnglishName} ({region.TwoLetterISORegionName})", Value = region.TwoLetterISORegionName });
-
-                list.Add(comboBox_country.SelectedValue.ToString());
+                comboBox_country.Items.Add(new { Text = $"{region.EnglishName}", Value = region.TwoLetterISORegionName });
             }
             //label_country.Text = comboBox_country.SelectedValue.ToString();
         }
@@ -39,6 +38,7 @@ namespace CertReqClient
         {
             CertificateRequest myRequest = new CertificateRequest();
 
+            
             myRequest.SetCommonName(textBox_commonName.Text);
             myRequest.SetSubjectAlternativeNames(textbox_alternativeNames.Text);
             myRequest.SetOrganization(textbox_organization.Text);
@@ -46,18 +46,24 @@ namespace CertReqClient
             myRequest.SetCity(textBox_City.Text);
             myRequest.SetState(textBox_State.Text);
             myRequest.SetCountry(textBox_Country.Text);
+            
 
             // calling method to create request file
             myRequest.CreateRequestFile(myRequest.GenerateCertificateRequest());
-
+            
 
             /////////////////////// CONSOLE ////////////////////////
             CertreqConsole myConsole = new CertreqConsole();
 
             // calling method for console commands
+            
             myConsole.SubmitCertificate();
             myConsole.AcceptCertificate();
+            
 
+            
+            //string folderPath = @"C:\Cert_TEST"; // Your path Where you want to save other than Server.MapPath            
+            
         }
     }
 }
