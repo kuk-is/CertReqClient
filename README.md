@@ -1,7 +1,7 @@
 # CertReqClient
-Client to request SSL certificates with GUI
+## Client to request SSL certificates with GUI ##
 
-What is a SSL-Certificate?
+**What is a SSL-Certificate?**
 old: SSL = Secure Sockets Layer // new: TLS = Transport Layer Security (TLS is the improvement)
 
 Ensures that the customer data sent to the server is encrypted (encrypting the communication of data that is transported to a web server through the web browser of a computer). In fact, one can imagine the certificates as "transport levels", over which the data exchange takes place.
