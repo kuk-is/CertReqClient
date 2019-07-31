@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(lblname));
             this.label_common_name = new System.Windows.Forms.Label();
             this.textBox_commonName = new System.Windows.Forms.TextBox();
             this.textbox_alternative_names = new System.Windows.Forms.Label();
@@ -39,16 +40,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_City = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox_State = new System.Windows.Forms.TextBox();
-            this.textBox_Country = new System.Windows.Forms.TextBox();
             this.btn_generate = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.lbl_error_required_field = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_country = new System.Windows.Forms.ComboBox();
-            this.label_country = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_common_name
@@ -145,15 +143,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "State:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(117, 415);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Country:";
-            // 
             // textBox_State
             // 
             this.textBox_State.Location = new System.Drawing.Point(185, 371);
@@ -161,14 +150,6 @@
             this.textBox_State.Name = "textBox_State";
             this.textBox_State.Size = new System.Drawing.Size(217, 26);
             this.textBox_State.TabIndex = 14;
-            // 
-            // textBox_Country
-            // 
-            this.textBox_Country.Location = new System.Drawing.Point(185, 412);
-            this.textBox_Country.Multiline = true;
-            this.textBox_Country.Name = "textBox_Country";
-            this.textBox_Country.Size = new System.Drawing.Size(217, 26);
-            this.textBox_Country.TabIndex = 15;
             // 
             // btn_generate
             // 
@@ -208,44 +189,32 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(117, 463);
+            this.label5.Location = new System.Drawing.Point(117, 420);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Country2:";
+            this.label5.Text = "Country:";
             // 
             // comboBox_country
             // 
             this.comboBox_country.FormattingEnabled = true;
-            this.comboBox_country.Location = new System.Drawing.Point(185, 454);
+            this.comboBox_country.Location = new System.Drawing.Point(185, 417);
             this.comboBox_country.Name = "comboBox_country";
             this.comboBox_country.Size = new System.Drawing.Size(217, 21);
             this.comboBox_country.TabIndex = 22;
-            // 
-            // label_country
-            // 
-            this.label_country.AutoSize = true;
-            this.label_country.Location = new System.Drawing.Point(31, 541);
-            this.label_country.Name = "label_country";
-            this.label_country.Size = new System.Drawing.Size(35, 13);
-            this.label_country.TabIndex = 23;
-            this.label_country.Text = "label6";
             // 
             // lblname
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 613);
-            this.Controls.Add(this.label_country);
             this.Controls.Add(this.comboBox_country);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_error_required_field);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_generate);
-            this.Controls.Add(this.textBox_Country);
             this.Controls.Add(this.textBox_State);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_City);
             this.Controls.Add(this.label1);
@@ -257,6 +226,7 @@
             this.Controls.Add(this.textbox_alternative_names);
             this.Controls.Add(this.textBox_commonName);
             this.Controls.Add(this.label_common_name);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "lblname";
             this.RightToLeftLayout = true;
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -278,16 +248,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_City;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_State;
-        private System.Windows.Forms.TextBox textBox_Country;
         private System.Windows.Forms.Button btn_generate;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Label lbl_error_required_field;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_country;
-        private System.Windows.Forms.Label label_country;
     }
 }
 
