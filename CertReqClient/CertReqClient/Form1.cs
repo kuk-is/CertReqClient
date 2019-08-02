@@ -18,6 +18,7 @@ namespace CertReqClient
             InitializeComponent();
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // filling the combobox
@@ -42,6 +43,9 @@ namespace CertReqClient
             //label_country.Text = comboBox_country.SelectedValue.ToString();
         }
 
+
+        
+
         private void Btn_generate_Click(object sender, EventArgs e)
         {
             CertificateRequest myRequest = new CertificateRequest();
@@ -59,18 +63,37 @@ namespace CertReqClient
             // calling method to create request file
             myRequest.CreateRequestFile(myRequest.GenerateCertificateRequest());
 
+                        
+            // saving CSR file to specific folder
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            /////////////////////// CONSOLE ////////////////////////
-            CertreqConsole myConsole = new CertreqConsole();
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FileName = myRequest.getCommonName() + ".txt";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            
 
-            // calling method for console commands
-            myConsole.SubmitCertificate();
-            myConsole.AcceptCertificate();
+                        
 
-            //string folderPath = @"C:\Cert_TEST"; // Your path Where you want to save other than Server.MapPath   
-            /*
-            string testikus = comboBox_country.SelectedValue.ToString();
-            */
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Code to write the stream goes here.
+                string filename = saveFileDialog1.FileName;
+                var request = myRequest.GenerateCertificateRequest();
+                
+                File.WriteAllText(filename, request);
+
+
+                string path = Path.GetDirectoryName(filename);
+
+                /////////////////////// CONSOLE ////////////////////////
+                CertreqConsole myConsole = new CertreqConsole();
+
+                // calling method for console commands
+                myConsole.SubmitCertificate(filename, path);
+                myConsole.AcceptCertificate(path);
+
+            }
         }
     }
 }

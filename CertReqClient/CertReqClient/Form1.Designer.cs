@@ -42,7 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_State = new System.Windows.Forms.TextBox();
             this.btn_generate = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_start_console = new System.Windows.Forms.Button();
             this.lbl_error_required_field = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -153,22 +153,22 @@
             // 
             // btn_generate
             // 
-            this.btn_generate.Location = new System.Drawing.Point(185, 510);
+            this.btn_generate.Location = new System.Drawing.Point(185, 473);
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(93, 31);
             this.btn_generate.TabIndex = 17;
-            this.btn_generate.Text = "create request";
+            this.btn_generate.Text = "create csr";
             this.btn_generate.UseVisualStyleBackColor = true;
             this.btn_generate.Click += new System.EventHandler(this.Btn_generate_Click);
             // 
-            // btn_cancel
+            // btn_start_console
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(309, 510);
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(93, 31);
-            this.btn_cancel.TabIndex = 18;
-            this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_start_console.Location = new System.Drawing.Point(309, 473);
+            this.btn_start_console.Name = "btn_start_console";
+            this.btn_start_console.Size = new System.Drawing.Size(93, 31);
+            this.btn_start_console.TabIndex = 18;
+            this.btn_start_console.Text = "start console";
+            this.btn_start_console.UseVisualStyleBackColor = true;
             // 
             // lbl_error_required_field
             // 
@@ -198,7 +198,7 @@
             // comboBox_country
             // 
             this.comboBox_country.FormattingEnabled = true;
-            this.comboBox_country.Location = new System.Drawing.Point(185, 417);
+            this.comboBox_country.Location = new System.Drawing.Point(185, 412);
             this.comboBox_country.Name = "comboBox_country";
             this.comboBox_country.Size = new System.Drawing.Size(217, 21);
             this.comboBox_country.TabIndex = 22;
@@ -212,7 +212,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_error_required_field);
-            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btn_start_console);
             this.Controls.Add(this.btn_generate);
             this.Controls.Add(this.textBox_State);
             this.Controls.Add(this.label2);
@@ -250,7 +250,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_State;
         private System.Windows.Forms.Button btn_generate;
-        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.Button btn_start_console;
         private System.Windows.Forms.Label lbl_error_required_field;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

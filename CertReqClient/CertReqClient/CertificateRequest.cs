@@ -16,6 +16,11 @@ namespace CertReqClient
         private string state;
         private string country;
 
+        // get Methode for commonName
+        public string getCommonName() {
+
+            return commonName;
+        }
 
         
         // creating setter methods
@@ -57,13 +62,14 @@ namespace CertReqClient
 
 
         // method to create request file
-        public void CreateRequestFile(string request) {
+        public string CreateRequestFile(string request) {
 
             string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
             string certEnd = "-----END CERTIFICATE REQUEST-----";
             string fullRequest = certBegin + request + certEnd;
 
             // create text file and save in folder
+            /*
             string path = @"c:\Cert_TEST\newCertificate.txt";
             using (FileStream fs = File.Create(path))
             {
@@ -71,8 +77,12 @@ namespace CertReqClient
                 // Add some information to the file.
                 fs.Write(info, 0, info.Length);
             }
+            */
+
+            return fullRequest;
         }
 
+        
 
         // code for encrypting the request
         public string GenerateCertificateRequest()
@@ -120,6 +130,11 @@ namespace CertReqClient
             var objEnroll = new CX509Enrollment();
             objEnroll.InitializeFromRequest(objPkcs10);
             var strRequest = objEnroll.CreateRequest(EncodingType.XCN_CRYPT_STRING_BASE64);
+
+            string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
+            string certEnd = "-----END CERTIFICATE REQUEST-----";
+            strRequest = certBegin + strRequest + certEnd;
+
             return strRequest;
         }
     }
