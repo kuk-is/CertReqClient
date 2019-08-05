@@ -56,6 +56,7 @@ namespace CertReqClient
             myRequest.SetDepartment(textBox_Department.Text);
             myRequest.SetCity(textBox_City.Text);
             myRequest.SetState(textBox_State.Text);
+            myRequest.SetDnsName(textbox_alternativeNames.Text);
             //myRequest.SetCountry(textBox_Country.Text);
             myRequest.SetCountry(comboBox_country.SelectedValue.ToString());
 
@@ -72,8 +73,7 @@ namespace CertReqClient
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
             
-
-                        
+           
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -83,14 +83,15 @@ namespace CertReqClient
                 
                 File.WriteAllText(filename, request);
 
-
-                string path = Path.GetDirectoryName(filename);
+                // create full path for console commands
+                string path = Path.GetDirectoryName(filename)  + "/"  +  Path.GetFileNameWithoutExtension(filename);
+                
 
                 /////////////////////// CONSOLE ////////////////////////
                 CertreqConsole myConsole = new CertreqConsole();
 
                 // calling method for console commands
-                myConsole.SubmitCertificate(filename, path);
+                myConsole.SubmitCertificate(path);
                 myConsole.AcceptCertificate(path);
 
             }

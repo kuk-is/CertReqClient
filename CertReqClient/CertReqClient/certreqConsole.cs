@@ -10,7 +10,7 @@ namespace CertReqClient
     class CertreqConsole
     {
         // running CL and submitting certificate
-        public void SubmitCertificate(string filename, string path) {
+        public void SubmitCertificate(string path) {
             /*
             Process Pro = new Process();
 
@@ -23,14 +23,15 @@ namespace CertReqClient
             */
 
             Process Pro = new Process();
-
+                                  
             Pro.StartInfo.FileName = "certreq.exe";
-            Pro.StartInfo.Arguments = "-submit -attrib \"CertificateTemplate: webserver\""  + filename + " "  + path + ".cer " + " " + path + ".pfx";
+            Pro.StartInfo.Arguments = "-submit -attrib \"CertificateTemplate: webserver\" "  + path + ".txt "  + path + ".cer " + " " + path + ".pfx";
             
             Pro.Start();
             Pro.WaitForExit();
 
             Console.ReadLine();
+            
         }
 
         // running CL and installing certificate
@@ -52,6 +53,7 @@ namespace CertReqClient
             P.Start();
 
             Console.ReadLine();
+            
         }
     }
 }

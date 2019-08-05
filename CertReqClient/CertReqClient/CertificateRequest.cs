@@ -15,6 +15,7 @@ namespace CertReqClient
         private string city;
         private string state;
         private string country;
+        private string dnsName;
 
         // get Methode for commonName
         public string getCommonName() {
@@ -22,7 +23,11 @@ namespace CertReqClient
             return commonName;
         }
 
-        
+        public void SetDnsName(string dnsName) {
+
+            this.dnsName = dnsName;
+        }
+
         // creating setter methods
         public void SetCommonName(string commonName)
         {
@@ -87,6 +92,7 @@ namespace CertReqClient
         // code for encrypting the request
         public string GenerateCertificateRequest()
         {
+
             var objCSPs = new CCspInformations();
             objCSPs.AddAvailableCsps();
 
@@ -123,7 +129,9 @@ namespace CertReqClient
 
             var objDN = new CX500DistinguishedName();
             //var subjectName = "CN = shaunxu.me, OU = ADCS, O = Blog, L = Beijng, S = Beijing, C = CN";
+            //var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
             var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
+        
             objDN.Encode(subjectName, X500NameFlags.XCN_CERT_NAME_STR_NONE);
             objPkcs10.Subject = objDN;
 
@@ -134,6 +142,7 @@ namespace CertReqClient
             string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
             string certEnd = "-----END CERTIFICATE REQUEST-----";
             strRequest = certBegin + strRequest + certEnd;
+
 
             return strRequest;
         }
