@@ -65,28 +65,6 @@ namespace CertReqClient
         }
 
 
-
-        // method to create request file
-        public string CreateRequestFile(string request) {
-
-            string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
-            string certEnd = "-----END CERTIFICATE REQUEST-----";
-            string fullRequest = certBegin + request + certEnd;
-
-            // create text file and save in folder
-            /*
-            string path = @"c:\Cert_TEST\newCertificate.txt";
-            using (FileStream fs = File.Create(path))
-            {
-                Byte[] info = new UTF8Encoding(true).GetBytes(fullRequest);
-                // Add some information to the file.
-                fs.Write(info, 0, info.Length);
-            }
-            */
-
-            return fullRequest;
-        }
-
         
 
         // code for encrypting the request
@@ -128,8 +106,6 @@ namespace CertReqClient
             objPkcs10.X509Extensions.Add((CX509Extension)objX509ExtensionEnhancedKeyUsage);
 
             var objDN = new CX500DistinguishedName();
-            //var subjectName = "CN = shaunxu.me, OU = ADCS, O = Blog, L = Beijng, S = Beijing, C = CN";
-            //var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
             var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
         
             objDN.Encode(subjectName, X500NameFlags.XCN_CERT_NAME_STR_NONE);

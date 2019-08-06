@@ -57,13 +57,10 @@ namespace CertReqClient
             myRequest.SetCity(textBox_City.Text);
             myRequest.SetState(textBox_State.Text);
             myRequest.SetDnsName(textbox_alternativeNames.Text);
-            //myRequest.SetCountry(textBox_Country.Text);
             myRequest.SetCountry(comboBox_country.SelectedValue.ToString());
 
 
-            // calling method to create request file
-            myRequest.CreateRequestFile(myRequest.GenerateCertificateRequest());
-
+            
                         
             // saving CSR file to specific folder
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
