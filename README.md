@@ -46,12 +46,13 @@ The 2048-bit SSL certificate and private key (server) is called an asymmetrical 
 
 
 **How to get an SSL certificate?**
-* To apply for SSL, you must create a registration request (CSR) and send it to the certification authority (CA). The tool provided by us simplifies the procedure considerably. This is the certificate of installation of the SSL Certificate to install.
+
+* To apply for SSL, you must create a registration request (CSR) and send it to the certification authority (CA). The tool      provided by us simplifies the procedure considerably. This is the certificate of installation of the SSL Certificate to install.
 
   1.) Please fill out the fields for "Domain: / Subject Alternative Names: / Organization: /	Department: / City: / State: / Country: /"
   
 
-Attention: It is especially important that you enter the really correct address for "Domain", which should later be certified.
+* Attention: It is especially important that you enter the really correct address for "Domain", which should later be certified.
 
   2.) Now click on "create and install csr" to install the certificate.
 
