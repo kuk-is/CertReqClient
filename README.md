@@ -53,7 +53,7 @@ The 2048-bit SSL certificate and private key (server) is called an asymmetrical 
 
 Attention: It is especially important that you enter the really correct address for "Domain", which should later be certified.
 
-  2. Now click on "Generate" to install the certificate.
+  2. Now click on "create and install csr" to install the certificate.
 
   Here we spare you the step, to send the request manually to the internal CA and to 	start the command line as administrator such as to have to call the following 	commands... certreq -submit -attrib "CertificateTemplate: webserver" <filename 	from 2.> <certificate name> .cer <private name Key> .pfx and the subsequent import 	of the certificates with the command certreq -accept <certificate name> .cer no 	longer need you, because the program was designed so that the command input in 	the background is automatic.
 
