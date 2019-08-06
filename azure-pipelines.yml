@@ -8,6 +8,8 @@ trigger:
 
 pool:
   name: 'kuk-local'
+  demands:
+  - agent.name -equals PC-146  # check for specific string in capability
 
 variables:
   solution: '**/*.sln'
