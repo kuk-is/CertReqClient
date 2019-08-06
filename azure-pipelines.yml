@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'kuk-local'
+  name: 'kuk-local'
 
 variables:
   solution: '**/*.sln'
