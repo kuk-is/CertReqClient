@@ -27,7 +27,6 @@ namespace CertReqClient
         // running CL and installing certificate
         public void AcceptCertificate(string path) {
            
-
             Process P = new Process();
 
             P.StartInfo.FileName = "certreq.exe";

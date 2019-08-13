@@ -9,23 +9,17 @@ namespace CertReqClient
     {
         // declaring variables 
         private string commonName;
-        private string subjectAlternativeNames;
         private string organization;
         private string department;
         private string city;
         private string state;
         private string country;
-        private string dnsName;
+        private string subjectAlternativeName;
 
         // get Methode for commonName
-        public string getCommonName() {
+        public string GetCommonName() {
 
             return commonName;
-        }
-
-        public void SetDnsName(string dnsName) {
-
-            this.dnsName = dnsName;
         }
 
         // creating setter methods
@@ -34,9 +28,9 @@ namespace CertReqClient
             this.commonName = commonName;
         }
 
-        public void SetSubjectAlternativeNames(string subjectAlternativeNames)
+        public void SetSubjectAlternativeNames(string subjectAlternativeName)
         {
-            this.subjectAlternativeNames = subjectAlternativeNames;
+            this.subjectAlternativeName = subjectAlternativeName;
         }
 
         public void SetOrganization(string organization)
@@ -70,7 +64,7 @@ namespace CertReqClient
         // code for encrypting the request
         public string GenerateCertificateRequest()
         {
-
+                        
             var objCSPs = new CCspInformations();
             objCSPs.AddAvailableCsps();
 
@@ -97,6 +91,33 @@ namespace CertReqClient
                 CERTENROLLLib.X509KeyUsageFlags.XCN_CERT_DATA_ENCIPHERMENT_KEY_USAGE);
             objPkcs10.X509Extensions.Add((CX509Extension)objExtensionKeyUsage);
 
+
+            //////////////////////////////////////////////////////////////
+            ////////////// SUBJECT ALTERNATIVE NAME (SAN) ///////////////
+            ////////////////////////////////////////////////////////////
+            
+            if (subjectAlternativeName != "")
+            {
+                string strRfc822Name = subjectAlternativeName;
+                
+                CAlternativeName objRfc822Name = new CAlternativeName();
+                CAlternativeNames objAlternativeNames = new CAlternativeNames(); 
+                CX509ExtensionAlternativeNames objExtensionAlternativeNames = new CX509ExtensionAlternativeNames();
+                
+                // Set Alternative DNS Name 
+                objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, strRfc822Name);
+                
+                // Set Alternative Names 
+                objAlternativeNames.Add(objRfc822Name);
+                objExtensionAlternativeNames.InitializeEncode(objAlternativeNames);
+                objPkcs10.X509Extensions.Add((CX509Extension)objExtensionAlternativeNames);
+            }
+
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////
+
+
             var objObjectId = new CObjectId();
             var objObjectIds = new CObjectIds();
             var objX509ExtensionEnhancedKeyUsage = new CX509ExtensionEnhancedKeyUsage();
@@ -107,7 +128,7 @@ namespace CertReqClient
 
             var objDN = new CX500DistinguishedName();
             var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
-        
+            
             objDN.Encode(subjectName, X500NameFlags.XCN_CERT_NAME_STR_NONE);
             objPkcs10.Subject = objDN;
 
