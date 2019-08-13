@@ -40,7 +40,6 @@ namespace CertReqClient
 
             comboBox_country.DataSource = new BindingSource(countries, null);
             comboBox_country.DropDownStyle = ComboBoxStyle.DropDownList;
-            //label_country.Text = comboBox_country.SelectedValue.ToString();
         }
 
 
@@ -56,17 +55,15 @@ namespace CertReqClient
             myRequest.SetDepartment(textBox_Department.Text);
             myRequest.SetCity(textBox_City.Text);
             myRequest.SetState(textBox_State.Text);
-            myRequest.SetDnsName(textbox_alternativeNames.Text);
             myRequest.SetCountry(comboBox_country.SelectedValue.ToString());
-
-
             
-                        
+
+
             // saving CSR file to specific folder
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FileName = myRequest.getCommonName() + ".txt";
+            saveFileDialog1.FileName = myRequest.GetCommonName() + ".txt";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
             
