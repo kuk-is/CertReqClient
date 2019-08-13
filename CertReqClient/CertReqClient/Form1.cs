@@ -83,7 +83,7 @@ namespace CertReqClient
                 // create full path for console commands
                 string path = Path.GetDirectoryName(filename)  + "/"  +  Path.GetFileNameWithoutExtension(filename);
                 
-
+                
                 /////////////////////// CONSOLE ////////////////////////
                 CertreqConsole myConsole = new CertreqConsole();
 
