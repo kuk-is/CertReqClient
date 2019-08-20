@@ -99,10 +99,12 @@ namespace CertReqClient
             if (subjectAlternativeName != "")
             {
                 string strRfc822Name = subjectAlternativeName;
-                
+                strRfc822Name = "local.domain.de, filipe.local.de, test123.locoal.my";
+
                 CAlternativeName objRfc822Name = new CAlternativeName();
                 CAlternativeNames objAlternativeNames = new CAlternativeNames(); 
                 CX509ExtensionAlternativeNames objExtensionAlternativeNames = new CX509ExtensionAlternativeNames();
+                
                 
                 // Set Alternative DNS Name 
                 objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, strRfc822Name);
@@ -112,7 +114,7 @@ namespace CertReqClient
                 objExtensionAlternativeNames.InitializeEncode(objAlternativeNames);
                 objPkcs10.X509Extensions.Add((CX509Extension)objExtensionAlternativeNames);
             }
-
+            
             //////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////

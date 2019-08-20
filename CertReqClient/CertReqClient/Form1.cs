@@ -25,7 +25,6 @@ namespace CertReqClient
             comboBox_country.DisplayMember = "Value";
             comboBox_country.ValueMember = "Key";
 
-
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(culture => culture.EnglishName);
 
             Dictionary<string, string> countries = new Dictionary<string, string>(); //int i = 0;
@@ -88,6 +87,7 @@ namespace CertReqClient
                 myConsole.SubmitCertificate(path);
                 myConsole.AcceptCertificate(path);
 
+                //tabControl1.SelectTab(tabPage2);
             }
         }
     }
