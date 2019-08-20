@@ -1,70 +1,46 @@
 ﻿using CERTENROLLLib;
 using System;
-using System.IO;
-using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 
 namespace CertReqClient
 {
     class CertificateRequest
     {
-        // declaring variables 
-        private string commonName;
-        private string organization;
-        private string department;
-        private string city;
-        private string state;
-        private string country;
-        private string subjectAlternativeName;
-
-        // get Methode for commonName
-        public string GetCommonName() {
-
-            return commonName;
-        }
-
-        // creating setter methods
-        public void SetCommonName(string commonName)
-        {
-            this.commonName = commonName;
-        }
-
-        public void SetSubjectAlternativeNames(string subjectAlternativeName)
-        {
-            this.subjectAlternativeName = subjectAlternativeName;
-        }
-
-        public void SetOrganization(string organization)
-        {
-            this.organization = organization;
-        }
-
-        public void SetDepartment(string department)
-        {
-            this.department = department;
-        }
-
-        public void SetCity(string city)
-        {
-            this.city = city;
-        }
-
-        public void SetState(string state)
-        {
-            this.state = state;
-        }
-
-        public void SetCountry(string country)
-        {
-            this.country = country;
-        }
-
+        
+        public string CommonName { get; set; }
+        public string Organization { get; set; }
+        public string Department { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string SubjectAlternativeName { get; set; }
 
         
+        
+        public IEnumerable<string> SubjectAlternativeDnsNames
+        {
+           get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("dns=")); }
+        }
 
+        public IEnumerable<string> SubjectAlternativeIpAddresses
+        {
+            get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("ipaddress=")).Select(s => s.Replace("ipaddress=", string.Empty)); }
+        }
+
+        public string[] SubjectAlternativeNames
+        {
+            get { return this.SubjectAlternativeName.Split(new string[] { "\r", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries); }
+        }
+        
+   
+
+      
         // code for encrypting the request
         public string GenerateCertificateRequest()
         {
-                        
+
             var objCSPs = new CCspInformations();
             objCSPs.AddAvailableCsps();
 
@@ -95,26 +71,41 @@ namespace CertReqClient
             //////////////////////////////////////////////////////////////
             ////////////// SUBJECT ALTERNATIVE NAME (SAN) ///////////////
             ////////////////////////////////////////////////////////////
-            
-            if (subjectAlternativeName != "")
-            {
-                string strRfc822Name = subjectAlternativeName;
-                strRfc822Name = "local.domain.de, filipe.local.de, test123.locoal.my";
 
-                CAlternativeName objRfc822Name = new CAlternativeName();
-                CAlternativeNames objAlternativeNames = new CAlternativeNames(); 
+            if (SubjectAlternativeNames.Any())
+            {
+                CAlternativeNames objAlternativeNames = new CAlternativeNames();
                 CX509ExtensionAlternativeNames objExtensionAlternativeNames = new CX509ExtensionAlternativeNames();
-                
-                
-                // Set Alternative DNS Name 
-                objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, strRfc822Name);
-                
-                // Set Alternative Names 
-                objAlternativeNames.Add(objRfc822Name);
+
+                foreach (var sanName in this.SubjectAlternativeNames)
+                {
+                    CAlternativeName objRfc822Name = new CAlternativeName();
+
+                    if (sanName.ToLowerInvariant().StartsWith("dns"))
+                    {
+                        // Set Alternative DNS Name
+                        string cleanedName = sanName.Replace("dns=", string.Empty);
+                        objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, cleanedName);
+                        objAlternativeNames.Add(objRfc822Name);
+                    }
+                    else if (sanName.ToLowerInvariant().StartsWith("ipaddress"))
+                    {
+                        // Set Alternative IP-Adress
+                        string cleanedName = sanName.Replace("ipaddress=", string.Empty);
+                        IPAddress ipAddress;
+                        if (IPAddress.TryParse(cleanedName, out ipAddress))
+                        {
+                            string ipBase64 = Convert.ToBase64String(ipAddress.GetAddressBytes());
+                            objRfc822Name.InitializeFromRawData(AlternativeNameType.XCN_CERT_ALT_NAME_IP_ADDRESS, EncodingType.XCN_CRYPT_STRING_BASE64, ipBase64);
+                            objAlternativeNames.Add(objRfc822Name);
+                        }
+                    }
+                }
+
                 objExtensionAlternativeNames.InitializeEncode(objAlternativeNames);
                 objPkcs10.X509Extensions.Add((CX509Extension)objExtensionAlternativeNames);
             }
-            
+
             //////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////
@@ -129,8 +120,8 @@ namespace CertReqClient
             objPkcs10.X509Extensions.Add((CX509Extension)objX509ExtensionEnhancedKeyUsage);
 
             var objDN = new CX500DistinguishedName();
-            var subjectName = "CN=" + commonName + ", OU=" + department + ", O=" + organization + ", L=" + city + ", S=" + state + ", C=" + country;
-            
+            var subjectName = "CN=" + this.CommonName + ", OU=" + this.Department + ", O=" + this.Organization + ", L=" + this.City + ", S=" + this.State + ", C=" + this.Country;
+
             objDN.Encode(subjectName, X500NameFlags.XCN_CERT_NAME_STR_NONE);
             objPkcs10.Subject = objDN;
 
@@ -141,7 +132,6 @@ namespace CertReqClient
             string certBegin = "-----BEGIN CERTIFICATE REQUEST-----\r\n";
             string certEnd = "-----END CERTIFICATE REQUEST-----";
             strRequest = certBegin + strRequest + certEnd;
-
 
             return strRequest;
         }
