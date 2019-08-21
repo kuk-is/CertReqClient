@@ -25,7 +25,6 @@ namespace CertReqClient
             comboBox_country.DisplayMember = "Value";
             comboBox_country.ValueMember = "Key";
 
-
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(culture => culture.EnglishName);
 
             Dictionary<string, string> countries = new Dictionary<string, string>(); //int i = 0;
@@ -43,44 +42,44 @@ namespace CertReqClient
         }
 
 
-        
+
 
         private void Btn_generate_Click(object sender, EventArgs e)
         {
             CertificateRequest myRequest = new CertificateRequest();
 
-            myRequest.SetCommonName(textBox_commonName.Text);
-            myRequest.SetSubjectAlternativeNames(textbox_alternativeNames.Text);
-            myRequest.SetOrganization(textbox_organization.Text);
-            myRequest.SetDepartment(textBox_Department.Text);
-            myRequest.SetCity(textBox_City.Text);
-            myRequest.SetState(textBox_State.Text);
-            myRequest.SetCountry(comboBox_country.SelectedValue.ToString());
-            
+            myRequest.CommonName = textBox_commonName.Text;
+            myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
+            myRequest.Organization = textbox_organization.Text;
+            myRequest.Department = textBox_Department.Text;
+            myRequest.City = textBox_City.Text;
+            myRequest.State = textBox_State.Text;
+            myRequest.Country = comboBox_country.SelectedValue.ToString();
+
 
 
             // saving CSR file to specific folder
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FileName = myRequest.GetCommonName() + ".txt";
+            saveFileDialog1.FileName = myRequest.CommonName;
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
-            
-           
+
+
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
                 var request = myRequest.GenerateCertificateRequest();
-                
+
                 File.WriteAllText(filename, request);
 
                 // create full path for console commands
-                string path = Path.GetDirectoryName(filename)  + "/"  +  Path.GetFileNameWithoutExtension(filename);
-                
-                
+                string path = Path.GetDirectoryName(filename) + "/" + Path.GetFileNameWithoutExtension(filename);
+
+
                 /////////////////////// CONSOLE ////////////////////////
                 CertreqConsole myConsole = new CertreqConsole();
 
@@ -88,6 +87,7 @@ namespace CertReqClient
                 myConsole.SubmitCertificate(path);
                 myConsole.AcceptCertificate(path);
 
+                //tabControl1.SelectTab(tabPage2);
             }
         }
     }
