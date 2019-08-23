@@ -7,7 +7,6 @@ namespace CertReqClient
     {
         // running CL and submitting certificate
         public void SubmitCertificate(string path) {
-           
             Process Pro = new Process();
                                   
             Pro.StartInfo.FileName = "certreq.exe";
@@ -17,12 +16,10 @@ namespace CertReqClient
             Pro.WaitForExit();
 
             Console.ReadLine();
-            
         }
 
         // running CL and installing certificate
         public void AcceptCertificate(string path) {
-           
             Process P = new Process();
 
             P.StartInfo.FileName = "certreq.exe";
@@ -30,7 +27,6 @@ namespace CertReqClient
             P.Start();
 
             Console.ReadLine();
-            
         }
     }
 }
