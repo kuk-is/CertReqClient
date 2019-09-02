@@ -21,6 +21,12 @@ namespace CertReqClient
         {
             // Calling FillCountryDropDown() Method
             FillCountryDropDown();
+
+            // TEST
+            FillSubjectType();
+
+            List<string> subjectType = new List<string>();
+            
         }
       
         private void Btn_generate_Click(object sender, EventArgs e)
@@ -46,6 +52,10 @@ namespace CertReqClient
 
                 //tabControl1.SelectTab(tabPage2);
             }
+            else
+            {
+                MessageBox.Show("Please enter the Domain.");
+            }
         }
 
         private void ReadInputValues(CertificateRequest myRequest)
@@ -64,7 +74,7 @@ namespace CertReqClient
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FileName = myRequest.CommonName;
+            saveFileDialog1.FileName = myRequest.CommonName + ".txt";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -109,6 +119,19 @@ namespace CertReqClient
 
             comboBox_country.DataSource = new BindingSource(countries, null);
             comboBox_country.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void FillSubjectType() {
+
+            List<string> subjectType = new List<string>();
+
+            subjectType.Add("dns=");
+            subjectType.Add("ipaddress=");
+        }
+
+        private void test_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(tabPage2);
         }
     }
 }
