@@ -7,20 +7,7 @@ namespace CertReqClient
 {
     class CertificateHandler
     {
-
-        /*
-        public IEnumerable<string> SubjectAlternativeDnsNames
-        {
-            get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("dns=")); }
-        }
-
-        public IEnumerable<string> SubjectAlternativeIpAddresses
-        {
-            get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("ipaddress=")).Select(s => s.Replace("ipaddress=", string.Empty)); }
-        }
-        */
-
-                
+        
         public string GenerateSigningRequest(CertificateRequest myRequest)
         {
 
@@ -76,7 +63,7 @@ namespace CertReqClient
             return objPkcs10;
         }
 
-
+        
         private CX509CertificateRequestPkcs10 MultipleSan(CX509CertificateRequestPkcs10 objPkcs10, CertificateRequest myRequest) {
 
             if (myRequest.SubjectAlternativeNames.Any())
@@ -88,6 +75,7 @@ namespace CertReqClient
                 {
                     CAlternativeName objRfc822Name = new CAlternativeName();
 
+                    
                     if (sanName.ToLowerInvariant().StartsWith("dns"))
                     {
                         // Set Alternative DNS Name
@@ -111,6 +99,7 @@ namespace CertReqClient
 
                 objExtensionAlternativeNames.InitializeEncode(objAlternativeNames);
                 objPkcs10.X509Extensions.Add((CX509Extension)objExtensionAlternativeNames);
+                
             }
             return objPkcs10;
         }
