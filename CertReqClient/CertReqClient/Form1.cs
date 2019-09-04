@@ -61,7 +61,7 @@ namespace CertReqClient
                     string specialChar = "";
                     foreach (string item in GetSpecialCharacter(myRequest))
                     {
-                        specialChar += item + ",";
+                        specialChar += item;
                     }
                     MessageBox.Show("The following Characters are not allowed: " + specialChar);
                 }
@@ -167,7 +167,7 @@ namespace CertReqClient
 
         private List<string> GetSpecialCharacter(CertificateRequest myRequest)
         {
-            string[] specialChars = new string[] { "+"};
+            string[] specialChars = new string[] { "+", ",", "\"", ";"};
             List<string> charsIn = new List<string>();
             string[] inputFields = new string[] {myRequest.Organization, myRequest.CommonName, myRequest.Department, myRequest.City, myRequest.State, myRequest.Country};
 
