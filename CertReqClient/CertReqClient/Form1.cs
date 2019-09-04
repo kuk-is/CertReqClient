@@ -47,6 +47,7 @@ namespace CertReqClient
         private void Btn_generate_Click(object sender, EventArgs e)
         {
             CertificateRequest myRequest = new CertificateRequest();
+            CertificateHandler myCerHandler = new CertificateHandler();
 
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
@@ -72,7 +73,7 @@ namespace CertReqClient
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
-                var request = myRequest.GenerateCertificateRequest();
+                var request = myCerHandler.GenerateSigningRequest(myRequest);
 
                 File.WriteAllText(filename, request);
 
