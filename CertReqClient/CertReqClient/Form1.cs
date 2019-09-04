@@ -22,13 +22,14 @@ namespace CertReqClient
             // Calling FillCountryDropDown() Method
             FillCountryDropDown();
 
-            // TEST
-            FillSubjectType();
+            subjectType.Items.Add("DNS-Name");
+            subjectType.Items.Add("IP-Address");
 
-            List<string> subjectType = new List<string>();
-            
+            // enable textbox by default
+            textbox_alternativeNames.Enabled = false;
         }
-      
+
+        
         private void Btn_generate_Click(object sender, EventArgs e)
         {
             CertificateRequest myRequest = new CertificateRequest();
@@ -38,19 +39,32 @@ namespace CertReqClient
             {
                 // Read all Input Fields
                 ReadInputValues(myRequest);
-                // Define Settings for SaveFileDialog
-                SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
-                // Returns path for Console Class
-                string path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
-                
-                /////////////////////// CONSOLE ////////////////////////
-                CertreqConsole myConsole = new CertreqConsole();
 
-                // calling method for console commands
-                myConsole.SubmitCertificate(path);
-                myConsole.AcceptCertificate(path);
+                if (GetSpecialCharacter(myRequest).Count <= 0)
+                {
+                    // Define Settings for SaveFileDialog
+                    SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
+                    // Returns path for Console Class
+                    string path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
 
-                //tabControl1.SelectTab(tabPage2);
+                    /////////////////////// CONSOLE ////////////////////////
+                    CertreqConsole myConsole = new CertreqConsole();
+
+                    // calling method for console commands
+                    myConsole.SubmitCertificate(path);
+                    myConsole.AcceptCertificate(path);
+
+                    //tabControl1.SelectTab(tabPage2);
+                }
+                else {
+
+                    string specialChar = "";
+                    foreach (string item in GetSpecialCharacter(myRequest))
+                    {
+                        specialChar += item + ",";
+                    }
+                    MessageBox.Show("The following Characters are not allowed: " + specialChar);
+                }
             }
             else
             {
@@ -61,7 +75,7 @@ namespace CertReqClient
         private void ReadInputValues(CertificateRequest myRequest)
         {
             myRequest.CommonName = textBox_commonName.Text;
-            myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
+            myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;            
             myRequest.Organization = textbox_organization.Text;
             myRequest.Department = textBox_Department.Text;
             myRequest.City = textBox_City.Text;
@@ -106,8 +120,8 @@ namespace CertReqClient
             comboBox_country.ValueMember = "Key";
 
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(culture => culture.EnglishName);
-
-            Dictionary<string, string> countries = new Dictionary<string, string>(); //int i = 0;
+            
+            Dictionary<string, string> countries = new Dictionary<string, string>();
             foreach (CultureInfo culture in cultures)
             {
                 RegionInfo region = new RegionInfo(culture.Name);
@@ -120,18 +134,71 @@ namespace CertReqClient
             comboBox_country.DataSource = new BindingSource(countries, null);
             comboBox_country.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-
-        private void FillSubjectType() {
-
-            List<string> subjectType = new List<string>();
-
-            subjectType.Add("dns=");
-            subjectType.Add("ipaddress=");
+        
+                
+        private void addSanBtn_Click(object sender, EventArgs e)
+        {
+            //if (subjectTypeInput.Text != "" )
+            if (!String.IsNullOrEmpty(subjectTypeInput.Text) && (!String.IsNullOrEmpty(subjectType.Text)))
+            {
+                string subjectTypeName = "";
+                switch (subjectType.Text)
+                {
+                    case "DNS-Name":
+                        subjectTypeName = "dns=";
+                        break;
+                    case "IP-Address":
+                        subjectTypeName = "ipaddress=";
+                        break;
+                    default:
+                        break;
+                }
+                textbox_alternativeNames.Text += subjectTypeName + subjectTypeInput.Text + "\r\n";
+                // Clear fields for new input
+                subjectTypeInput.Text = "";
+                subjectType.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Subject Alernative Name or SAN Type is missing.");
+            }
         }
 
-        private void test_Click(object sender, EventArgs e)
+
+        private List<string> GetSpecialCharacter(CertificateRequest myRequest)
         {
-            tabControl1.SelectTab(tabPage2);
+            string[] specialChars = new string[] { "+"};
+            List<string> charsIn = new List<string>();
+            string[] inputFields = new string[] {myRequest.Organization, myRequest.CommonName, myRequest.Department, myRequest.City, myRequest.State, myRequest.Country};
+
+            foreach (var item in specialChars)
+            {
+                foreach (var fields in inputFields)
+                {
+                    if (fields.Contains(item))
+                    {
+                        if (!charsIn.Contains(item))
+                        {
+                            charsIn.Add(item);
+                        }
+                    }
+                }
+            }
+            return charsIn;
+        }
+
+        private void editSAN_Click(object sender, EventArgs e)
+        {
+            if (textbox_alternativeNames.Enabled == false)
+            {
+                textbox_alternativeNames.Enabled = true;
+                editSAN.Text = "close edit mode";
+            }
+            else if (textbox_alternativeNames.Enabled == true)
+            {
+                textbox_alternativeNames.Enabled = false;
+                editSAN.Text = "edit SAN";
+            }   
         }
     }
 }

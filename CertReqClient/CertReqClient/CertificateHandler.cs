@@ -7,20 +7,7 @@ namespace CertReqClient
 {
     class CertificateHandler
     {
-
-        /*
-        public IEnumerable<string> SubjectAlternativeDnsNames
-        {
-            get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("dns=")); }
-        }
-
-        public IEnumerable<string> SubjectAlternativeIpAddresses
-        {
-            get { return this.SubjectAlternativeNames.Where(s => s.StartsWith("ipaddress=")).Select(s => s.Replace("ipaddress=", string.Empty)); }
-        }
-        */
-
-                
+        
         public string GenerateSigningRequest(CertificateRequest myRequest)
         {
 
