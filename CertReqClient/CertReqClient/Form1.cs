@@ -27,24 +27,25 @@ namespace CertReqClient
 
             // enable textbox by default
             textbox_alternativeNames.Enabled = false;
+            // TabControl - Disable/Enable tab page
+        
         }
 
         
         private void Btn_generate_Click(object sender, EventArgs e)
         {
-            CertificateRequest myRequest = new CertificateRequest();
-            CertificateHandler myCerHandler = new CertificateHandler();
 
             if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
             {
                 // Read all Input Fields
-                ReadInputValues(myRequest);
+                CertificateRequest myRequest = ReadInputValues();
 
                 if (GetSpecialCharacter(myRequest).Count <= 0)
                 {
                     // Define Settings for SaveFileDialog
                     SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
                     // Returns path for Console Class
+                    CertificateHandler myCerHandler = new CertificateHandler();
                     string path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
 
                     /////////////////////// CONSOLE ////////////////////////
@@ -53,8 +54,6 @@ namespace CertReqClient
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
-
-                    //tabControl1.SelectTab(tabPage2);
                 }
                 else {
 
@@ -72,8 +71,9 @@ namespace CertReqClient
             }
         }
 
-        private void ReadInputValues(CertificateRequest myRequest)
+        private CertificateRequest ReadInputValues()
         {
+            CertificateRequest myRequest = new CertificateRequest();
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;            
             myRequest.Organization = textbox_organization.Text;
@@ -81,6 +81,7 @@ namespace CertReqClient
             myRequest.City = textBox_City.Text;
             myRequest.State = textBox_State.Text;
             myRequest.Country = comboBox_country.SelectedValue.ToString();
+            return myRequest;
         }
 
         private SaveFileDialog SaveDialogSettings(CertificateRequest myRequest)
@@ -122,12 +123,14 @@ namespace CertReqClient
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(culture => culture.EnglishName);
             
             Dictionary<string, string> countries = new Dictionary<string, string>();
+            countries.Add("", "");
+
             foreach (CultureInfo culture in cultures)
             {
                 RegionInfo region = new RegionInfo(culture.Name);
                 if (countries.ContainsKey(region.TwoLetterISORegionName) == false)
                 {
-                    countries.Add(region.TwoLetterISORegionName, $"{region.EnglishName}");
+                    countries.Add(region.TwoLetterISORegionName, region.EnglishName);
                 }
             }
 
@@ -187,6 +190,7 @@ namespace CertReqClient
             return charsIn;
         }
 
+
         private void editSAN_Click(object sender, EventArgs e)
         {
             if (textbox_alternativeNames.Enabled == false)
@@ -199,6 +203,46 @@ namespace CertReqClient
                 textbox_alternativeNames.Enabled = false;
                 editSAN.Text = "edit SAN";
             }   
+        }
+
+        private void generateCsrBtn_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
+            {
+                tabControl1.SelectTab(tabPage2);
+                SetDataForOverview();
+            }
+            else
+            {
+                MessageBox.Show("Please enter the Domain.");
+            }
+        }
+
+        private void SetDataForOverview() {
+
+            CertificateRequest myRequest = ReadInputValues();
+
+            tb_subAltNames.ScrollBars = ScrollBars.Both;
+            tb_subAltNames.WordWrap = false;
+            tb_subAltNames.ReadOnly = true;
+
+            lbl_domain.Text = myRequest.CommonName;
+            tb_subAltNames.Text = myRequest.SubjectAlternativeName;
+            lbl_organization.Text = myRequest.Organization;
+            lbl_department.Text = myRequest.Department;
+            lbl_city.Text = myRequest.City;
+            lbl_state.Text = myRequest.State;
+            
+            var splitString = comboBox_country.SelectedItem.ToString().Split(',');
+            string firstSplit = splitString[1];
+
+            var splitSpecialChar = firstSplit.Split(']');
+            lbl_country.Text = splitSpecialChar[0];
+        }
+
+        private void overviewBackBtn_Click(object sender, EventArgs e)
+        {
+             tabControl1.SelectTab(tabPage1);
         }
     }
 }
