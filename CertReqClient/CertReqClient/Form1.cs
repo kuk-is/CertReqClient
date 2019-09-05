@@ -16,6 +16,8 @@ namespace CertReqClient
             InitializeComponent();
         }
 
+        CertreqConsole myConsole = new CertreqConsole();
+        CertificateRequest myRequest = new CertificateRequest();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -34,34 +36,21 @@ namespace CertReqClient
         
         private void Btn_generate_Click(object sender, EventArgs e)
         {
-
             if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
             {
                 // Read all Input Fields
                 CertificateRequest myRequest = ReadInputValues();
 
-                if (GetSpecialCharacter(myRequest).Count <= 0)
+                List<string> specialCharacters = GetSpecialCharacter(myRequest);
+                if (specialCharacters.Count <= 0)
                 {
-                    // Define Settings for SaveFileDialog
-                    SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
-                    // Returns path for Console Class
-                    CertificateHandler myCerHandler = new CertificateHandler();
-                    string path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
-
-                    /////////////////////// CONSOLE ////////////////////////
-                    CertreqConsole myConsole = new CertreqConsole();
-
+                    string path = SaveCsrFile(myConsole, myRequest);
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
                 }
                 else {
-
-                    string specialChar = "";
-                    foreach (string item in GetSpecialCharacter(myRequest))
-                    {
-                        specialChar += item;
-                    }
+                    string specialChar = string.Join("", specialCharacters);
                     MessageBox.Show("The following Characters are not allowed: " + specialChar);
                 }
             }
@@ -73,7 +62,6 @@ namespace CertReqClient
 
         private CertificateRequest ReadInputValues()
         {
-            CertificateRequest myRequest = new CertificateRequest();
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;            
             myRequest.Organization = textbox_organization.Text;
@@ -113,6 +101,7 @@ namespace CertReqClient
             }
             return null;
         }
+
 
         private void FillCountryDropDown()
         {
@@ -205,6 +194,7 @@ namespace CertReqClient
             }   
         }
 
+
         private void generateCsrBtn_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
@@ -217,6 +207,7 @@ namespace CertReqClient
                 MessageBox.Show("Please enter the Domain.");
             }
         }
+
 
         private void SetDataForOverview() {
 
@@ -240,9 +231,32 @@ namespace CertReqClient
             lbl_country.Text = splitSpecialChar[0];
         }
 
+
         private void overviewBackBtn_Click(object sender, EventArgs e)
         {
              tabControl1.SelectTab(tabPage1);
+        }
+
+
+        private void crtCsrFile_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(tabPage3);
+            string path = SaveCsrFile(myConsole, myRequest);
+        }
+
+
+        private string SaveCsrFile(CertreqConsole myConsole, CertificateRequest myRequest)
+        {
+            string path = null;
+            if (GetSpecialCharacter(myRequest).Count <= 0)
+            {
+                // Define Settings for SaveFileDialog
+                SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
+                // Returns path for Console Class
+                CertificateHandler myCerHandler = new CertificateHandler();
+                path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
+            }
+            return path;
         }
     }
 }
