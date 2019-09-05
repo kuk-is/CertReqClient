@@ -73,6 +73,7 @@
             this.lbl_country = new System.Windows.Forms.Label();
             this.tb_subAltNames = new System.Windows.Forms.TextBox();
             this.overviewBackBtn = new System.Windows.Forms.Button();
+            this.crtCsrFile = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -323,6 +324,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage2.Controls.Add(this.crtCsrFile);
             this.tabPage2.Controls.Add(this.overviewBackBtn);
             this.tabPage2.Controls.Add(this.tb_subAltNames);
             this.tabPage2.Controls.Add(this.lbl_country);
@@ -510,6 +512,16 @@
             this.overviewBackBtn.UseVisualStyleBackColor = true;
             this.overviewBackBtn.Click += new System.EventHandler(this.overviewBackBtn_Click);
             // 
+            // crtCsrFile
+            // 
+            this.crtCsrFile.Location = new System.Drawing.Point(213, 487);
+            this.crtCsrFile.Name = "crtCsrFile";
+            this.crtCsrFile.Size = new System.Drawing.Size(145, 31);
+            this.crtCsrFile.TabIndex = 30;
+            this.crtCsrFile.Text = "create certificate file";
+            this.crtCsrFile.UseVisualStyleBackColor = true;
+            this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
+            // 
             // lblname
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -578,6 +590,7 @@
         private System.Windows.Forms.Label lbl_country;
         private System.Windows.Forms.TextBox tb_subAltNames;
         private System.Windows.Forms.Button overviewBackBtn;
+        private System.Windows.Forms.Button crtCsrFile;
     }
 }
 
