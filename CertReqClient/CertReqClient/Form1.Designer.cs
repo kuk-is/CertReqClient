@@ -74,9 +74,12 @@
             this.tb_subAltNames = new System.Windows.Forms.TextBox();
             this.overviewBackBtn = new System.Windows.Forms.Button();
             this.crtCsrFile = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lbl_info_private_key = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_error_required_field
@@ -361,13 +364,15 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage3.Controls.Add(this.lbl_info_private_key);
+            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(480, 600);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -522,6 +527,24 @@
             this.crtCsrFile.UseVisualStyleBackColor = true;
             this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(75, 104);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // lbl_info_private_key
+            // 
+            this.lbl_info_private_key.AutoSize = true;
+            this.lbl_info_private_key.Location = new System.Drawing.Point(40, 40);
+            this.lbl_info_private_key.Name = "lbl_info_private_key";
+            this.lbl_info_private_key.Size = new System.Drawing.Size(41, 13);
+            this.lbl_info_private_key.TabIndex = 1;
+            this.lbl_info_private_key.Text = "label14";
+            // 
             // lblname
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +563,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -591,6 +616,8 @@
         private System.Windows.Forms.TextBox tb_subAltNames;
         private System.Windows.Forms.Button overviewBackBtn;
         private System.Windows.Forms.Button crtCsrFile;
+        private System.Windows.Forms.Label lbl_info_private_key;
+        private System.Windows.Forms.Button button1;
     }
 }
 

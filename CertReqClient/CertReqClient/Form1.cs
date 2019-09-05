@@ -240,8 +240,20 @@ namespace CertReqClient
 
         private void crtCsrFile_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectTab(tabPage3);
             string path = SaveCsrFile(myConsole, myRequest);
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                DialogResult dialogResult;
+                dialogResult = MessageBox.Show("File has been successfully created!\r Do you want to create the private key now? ", "",MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    tabControl1.SelectTab(tabPage3);
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
         }
 
 
