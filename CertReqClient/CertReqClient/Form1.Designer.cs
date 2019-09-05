@@ -74,8 +74,11 @@
             this.tb_subAltNames = new System.Windows.Forms.TextBox();
             this.overviewBackBtn = new System.Windows.Forms.Button();
             this.crtCsrFile = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.lbl_info_private_key = new System.Windows.Forms.Label();
+            this.openCsrFileBtn = new System.Windows.Forms.Button();
+            this.lbl_selectedCsrFile = new System.Windows.Forms.Label();
+            this.lb_clickPrivateKeyBtn = new System.Windows.Forms.Label();
+            this.createPrivateKeyBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -365,8 +368,11 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage3.Controls.Add(this.createPrivateKeyBtn);
+            this.tabPage3.Controls.Add(this.lb_clickPrivateKeyBtn);
+            this.tabPage3.Controls.Add(this.lbl_selectedCsrFile);
+            this.tabPage3.Controls.Add(this.openCsrFileBtn);
             this.tabPage3.Controls.Add(this.lbl_info_private_key);
-            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -527,15 +533,6 @@
             this.crtCsrFile.UseVisualStyleBackColor = true;
             this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(75, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // lbl_info_private_key
             // 
             this.lbl_info_private_key.AutoSize = true;
@@ -544,6 +541,44 @@
             this.lbl_info_private_key.Size = new System.Drawing.Size(41, 13);
             this.lbl_info_private_key.TabIndex = 1;
             this.lbl_info_private_key.Text = "label14";
+            // 
+            // openCsrFileBtn
+            // 
+            this.openCsrFileBtn.Location = new System.Drawing.Point(43, 85);
+            this.openCsrFileBtn.Name = "openCsrFileBtn";
+            this.openCsrFileBtn.Size = new System.Drawing.Size(107, 29);
+            this.openCsrFileBtn.TabIndex = 2;
+            this.openCsrFileBtn.Text = "choose csr file";
+            this.openCsrFileBtn.UseVisualStyleBackColor = true;
+            this.openCsrFileBtn.Click += new System.EventHandler(this.openCsrFileBtn_Click);
+            // 
+            // lbl_selectedCsrFile
+            // 
+            this.lbl_selectedCsrFile.AutoSize = true;
+            this.lbl_selectedCsrFile.Location = new System.Drawing.Point(165, 93);
+            this.lbl_selectedCsrFile.Name = "lbl_selectedCsrFile";
+            this.lbl_selectedCsrFile.Size = new System.Drawing.Size(41, 13);
+            this.lbl_selectedCsrFile.TabIndex = 3;
+            this.lbl_selectedCsrFile.Text = "label16";
+            // 
+            // lb_clickPrivateKeyBtn
+            // 
+            this.lb_clickPrivateKeyBtn.AutoSize = true;
+            this.lb_clickPrivateKeyBtn.Location = new System.Drawing.Point(40, 153);
+            this.lb_clickPrivateKeyBtn.Name = "lb_clickPrivateKeyBtn";
+            this.lb_clickPrivateKeyBtn.Size = new System.Drawing.Size(41, 13);
+            this.lb_clickPrivateKeyBtn.TabIndex = 4;
+            this.lb_clickPrivateKeyBtn.Text = "label15";
+            // 
+            // createPrivateKeyBtn
+            // 
+            this.createPrivateKeyBtn.Location = new System.Drawing.Point(43, 206);
+            this.createPrivateKeyBtn.Name = "createPrivateKeyBtn";
+            this.createPrivateKeyBtn.Size = new System.Drawing.Size(107, 29);
+            this.createPrivateKeyBtn.TabIndex = 5;
+            this.createPrivateKeyBtn.Text = "create private key";
+            this.createPrivateKeyBtn.UseVisualStyleBackColor = true;
+            this.createPrivateKeyBtn.Click += new System.EventHandler(this.createPrivateKeyBtn_Click);
             // 
             // lblname
             // 
@@ -617,7 +652,10 @@
         private System.Windows.Forms.Button overviewBackBtn;
         private System.Windows.Forms.Button crtCsrFile;
         private System.Windows.Forms.Label lbl_info_private_key;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button openCsrFileBtn;
+        private System.Windows.Forms.Label lbl_selectedCsrFile;
+        private System.Windows.Forms.Label lb_clickPrivateKeyBtn;
+        private System.Windows.Forms.Button createPrivateKeyBtn;
     }
 }
 

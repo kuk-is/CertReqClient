@@ -240,7 +240,9 @@ namespace CertReqClient
 
         private void crtCsrFile_Click(object sender, EventArgs e)
         {
+            createPrivateKeyBtn.Visible = false;
             string path = SaveCsrFile(myConsole, myRequest);
+
             if (!string.IsNullOrWhiteSpace(path))
             {
                 DialogResult dialogResult;
@@ -248,6 +250,10 @@ namespace CertReqClient
                 if (dialogResult == DialogResult.Yes)
                 {
                     tabControl1.SelectTab(tabPage3);
+                    string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
+                    lb_clickPrivateKeyBtn.Text = "";
+                    lbl_selectedCsrFile.Text = "";
+                    lbl_info_private_key.Text = privateInfoTxt;
                 }
                 else
                 {
@@ -269,6 +275,42 @@ namespace CertReqClient
                 path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
             }
             return path;
+        }
+
+
+        private void openCsrFileBtn_Click(object sender, EventArgs e)
+        {
+            string selectedFileName= OpenFileDialog();
+            if (!String.IsNullOrWhiteSpace(selectedFileName))
+            {
+                lbl_selectedCsrFile.Text = selectedFileName;
+                lb_clickPrivateKeyBtn.Text = "You can now create the private key by clicking the \"create private key\" Button";
+                createPrivateKeyBtn.Visible = true;
+            }
+            
+        }
+
+
+        private string OpenFileDialog() {
+
+            string selectedFileName = "";
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "Text files (*.txt)|*.txt";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                selectedFileName = openFileDialog1.FileName;
+            }
+            return selectedFileName;
+        }
+
+
+        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        {
+            string path = Path.GetDirectoryName(lbl_selectedCsrFile.Text) + "/" + Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text);
+            myConsole.SubmitCertificate(path);
         }
     }
 }
