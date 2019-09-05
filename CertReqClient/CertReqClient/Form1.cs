@@ -45,7 +45,7 @@ namespace CertReqClient
                 if (specialCharacters.Count <= 0)
                 {
                     string path = SaveCsrFile(myConsole, myRequest);
-
+                    // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
                 }
@@ -241,10 +241,7 @@ namespace CertReqClient
         private void crtCsrFile_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab(tabPage3);
-
             string path = SaveCsrFile(myConsole, myRequest);
-            myConsole.SubmitCertificate(path);
-            //crtCsrFile
         }
 
 
@@ -258,9 +255,6 @@ namespace CertReqClient
                 // Returns path for Console Class
                 CertificateHandler myCerHandler = new CertificateHandler();
                 path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
-
-                /////////////////////// CONSOLE ////////////////////////
-                // calling method for console commands
             }
             return path;
         }
