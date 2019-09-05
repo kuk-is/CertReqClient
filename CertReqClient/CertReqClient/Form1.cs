@@ -18,6 +18,7 @@ namespace CertReqClient
 
         CertreqConsole myConsole = new CertreqConsole();
         CertificateRequest myRequest = new CertificateRequest();
+        DialogResult dialogResult;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,8 +30,6 @@ namespace CertReqClient
 
             // enable textbox by default
             textbox_alternativeNames.Enabled = false;
-            // TabControl - Disable/Enable tab page
-        
         }
 
         
@@ -245,7 +244,6 @@ namespace CertReqClient
 
             if (!string.IsNullOrWhiteSpace(path))
             {
-                DialogResult dialogResult;
                 dialogResult = MessageBox.Show("File has been successfully created!\r Do you want to create the private key now? ", "",MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -280,7 +278,8 @@ namespace CertReqClient
 
         private void openCsrFileBtn_Click(object sender, EventArgs e)
         {
-            string selectedFileName= OpenFileDialog();
+            string selectedFileName = GetFileName(OpenFileDiaglog());
+
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
                 lbl_selectedCsrFile.Text = selectedFileName;
@@ -290,27 +289,51 @@ namespace CertReqClient
             
         }
 
+        
+        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        {
+            string path = Path.GetDirectoryName(lbl_selectedCsrFile.Text) + "/" + Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text);
+            // creating the private key
+            myConsole.SubmitCertificate(path);
+            if (File.Exists(path + ".cer"))
+            {
+                dialogResult = MessageBox.Show("The private key file has been successfully created!\r Do you want to install the certificate now? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    // installing the certificate
+                    myConsole.AcceptCertificate(path);
+                    //tabControl1.SelectTab(tabPage4);
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                MessageBox.Show("An error occured, please contact your administrator.");
+            }
+        }
 
-        private string OpenFileDialog() {
 
-            string selectedFileName = "";
+        private OpenFileDialog OpenFileDiaglog()
+        {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "Text files (*.txt)|*.txt";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
+            return openFileDialog1;
+        }
+
+
+        private string GetFileName(OpenFileDialog openFileDialog1) {
+            string selectedFileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 selectedFileName = openFileDialog1.FileName;
             }
             return selectedFileName;
-        }
-
-
-        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
-        {
-            string path = Path.GetDirectoryName(lbl_selectedCsrFile.Text) + "/" + Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text);
-            myConsole.SubmitCertificate(path);
         }
     }
 }
