@@ -428,7 +428,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(140, 393);
+            this.label11.Location = new System.Drawing.Point(132, 393);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 13);
             this.label11.TabIndex = 6;
@@ -437,7 +437,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(140, 431);
+            this.label12.Location = new System.Drawing.Point(121, 431);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(46, 13);
             this.label12.TabIndex = 7;
@@ -463,7 +463,7 @@
             // lbl_organization
             // 
             this.lbl_organization.AutoSize = true;
-            this.lbl_organization.Location = new System.Drawing.Point(214, 265);
+            this.lbl_organization.Location = new System.Drawing.Point(218, 265);
             this.lbl_organization.Name = "lbl_organization";
             this.lbl_organization.Size = new System.Drawing.Size(69, 13);
             this.lbl_organization.TabIndex = 13;
