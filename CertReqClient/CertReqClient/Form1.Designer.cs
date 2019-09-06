@@ -55,30 +55,30 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_City = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.crtCsrFile = new System.Windows.Forms.Button();
+            this.overviewBackBtn = new System.Windows.Forms.Button();
+            this.tb_subAltNames = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.LblOverview = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lbl_domain = new System.Windows.Forms.Label();
-            this.lbl_organization = new System.Windows.Forms.Label();
-            this.lbl_department = new System.Windows.Forms.Label();
-            this.lbl_city = new System.Windows.Forms.Label();
-            this.lbl_state = new System.Windows.Forms.Label();
-            this.lbl_country = new System.Windows.Forms.Label();
-            this.tb_subAltNames = new System.Windows.Forms.TextBox();
-            this.overviewBackBtn = new System.Windows.Forms.Button();
-            this.crtCsrFile = new System.Windows.Forms.Button();
-            this.lbl_info_private_key = new System.Windows.Forms.Label();
-            this.openCsrFileBtn = new System.Windows.Forms.Button();
-            this.lbl_selectedCsrFile = new System.Windows.Forms.Label();
-            this.lb_clickPrivateKeyBtn = new System.Windows.Forms.Label();
             this.createPrivateKeyBtn = new System.Windows.Forms.Button();
+            this.lb_clickPrivateKeyBtn = new System.Windows.Forms.Label();
+            this.lbl_selectedCsrFile = new System.Windows.Forms.Label();
+            this.openCsrFileBtn = new System.Windows.Forms.Button();
+            this.lbl_info_private_key = new System.Windows.Forms.Label();
+            this.tb_overview_domain = new System.Windows.Forms.TextBox();
+            this.tb_overview_organization = new System.Windows.Forms.TextBox();
+            this.tb_overview_department = new System.Windows.Forms.TextBox();
+            this.tb_overview_city = new System.Windows.Forms.TextBox();
+            this.tb_overview_state = new System.Windows.Forms.TextBox();
+            this.tb_overview_country = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -330,15 +330,15 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage2.Controls.Add(this.tb_overview_country);
+            this.tabPage2.Controls.Add(this.tb_overview_state);
+            this.tabPage2.Controls.Add(this.tb_overview_city);
+            this.tabPage2.Controls.Add(this.tb_overview_department);
+            this.tabPage2.Controls.Add(this.tb_overview_organization);
+            this.tabPage2.Controls.Add(this.tb_overview_domain);
             this.tabPage2.Controls.Add(this.crtCsrFile);
             this.tabPage2.Controls.Add(this.overviewBackBtn);
             this.tabPage2.Controls.Add(this.tb_subAltNames);
-            this.tabPage2.Controls.Add(this.lbl_country);
-            this.tabPage2.Controls.Add(this.lbl_state);
-            this.tabPage2.Controls.Add(this.lbl_city);
-            this.tabPage2.Controls.Add(this.lbl_department);
-            this.tabPage2.Controls.Add(this.lbl_organization);
-            this.tabPage2.Controls.Add(this.lbl_domain);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.label11);
@@ -354,6 +354,105 @@
             this.tabPage2.Size = new System.Drawing.Size(480, 600);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
+            // 
+            // crtCsrFile
+            // 
+            this.crtCsrFile.Location = new System.Drawing.Point(213, 487);
+            this.crtCsrFile.Name = "crtCsrFile";
+            this.crtCsrFile.Size = new System.Drawing.Size(145, 31);
+            this.crtCsrFile.TabIndex = 30;
+            this.crtCsrFile.Text = "create certificate file";
+            this.crtCsrFile.UseVisualStyleBackColor = true;
+            this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
+            // 
+            // overviewBackBtn
+            // 
+            this.overviewBackBtn.Location = new System.Drawing.Point(35, 487);
+            this.overviewBackBtn.Name = "overviewBackBtn";
+            this.overviewBackBtn.Size = new System.Drawing.Size(145, 31);
+            this.overviewBackBtn.TabIndex = 29;
+            this.overviewBackBtn.Text = "< back";
+            this.overviewBackBtn.UseVisualStyleBackColor = true;
+            this.overviewBackBtn.Click += new System.EventHandler(this.overviewBackBtn_Click);
+            // 
+            // tb_subAltNames
+            // 
+            this.tb_subAltNames.Location = new System.Drawing.Point(211, 145);
+            this.tb_subAltNames.Multiline = true;
+            this.tb_subAltNames.Name = "tb_subAltNames";
+            this.tb_subAltNames.Size = new System.Drawing.Size(147, 99);
+            this.tb_subAltNames.TabIndex = 18;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(218, 112);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(0, 13);
+            this.label13.TabIndex = 10;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(121, 434);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(46, 13);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Country:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(132, 393);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "State:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(140, 349);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(27, 13);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "City:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 194);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(135, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Subject Alternative Names:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(98, 265);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Organization:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(102, 305);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Department:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(121, 112);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Domain:";
             // 
             // LblOverview
             // 
@@ -380,167 +479,33 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             // 
-            // label6
+            // createPrivateKeyBtn
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(121, 112);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Domain:";
+            this.createPrivateKeyBtn.Location = new System.Drawing.Point(43, 206);
+            this.createPrivateKeyBtn.Name = "createPrivateKeyBtn";
+            this.createPrivateKeyBtn.Size = new System.Drawing.Size(107, 29);
+            this.createPrivateKeyBtn.TabIndex = 5;
+            this.createPrivateKeyBtn.Text = "create private key";
+            this.createPrivateKeyBtn.UseVisualStyleBackColor = true;
+            this.createPrivateKeyBtn.Click += new System.EventHandler(this.createPrivateKeyBtn_Click);
             // 
-            // label7
+            // lb_clickPrivateKeyBtn
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(102, 305);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Department:";
+            this.lb_clickPrivateKeyBtn.AutoSize = true;
+            this.lb_clickPrivateKeyBtn.Location = new System.Drawing.Point(40, 153);
+            this.lb_clickPrivateKeyBtn.Name = "lb_clickPrivateKeyBtn";
+            this.lb_clickPrivateKeyBtn.Size = new System.Drawing.Size(41, 13);
+            this.lb_clickPrivateKeyBtn.TabIndex = 4;
+            this.lb_clickPrivateKeyBtn.Text = "label15";
             // 
-            // label8
+            // lbl_selectedCsrFile
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(98, 265);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Organization:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 194);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(135, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Subject Alternative Names:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(140, 349);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(27, 13);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "City:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(132, 393);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "State:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(121, 431);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 13);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Country:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(218, 112);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(0, 13);
-            this.label13.TabIndex = 10;
-            // 
-            // lbl_domain
-            // 
-            this.lbl_domain.AutoSize = true;
-            this.lbl_domain.Location = new System.Drawing.Point(218, 112);
-            this.lbl_domain.Name = "lbl_domain";
-            this.lbl_domain.Size = new System.Drawing.Size(56, 13);
-            this.lbl_domain.TabIndex = 11;
-            this.lbl_domain.Text = "lbl Domain";
-            // 
-            // lbl_organization
-            // 
-            this.lbl_organization.AutoSize = true;
-            this.lbl_organization.Location = new System.Drawing.Point(218, 265);
-            this.lbl_organization.Name = "lbl_organization";
-            this.lbl_organization.Size = new System.Drawing.Size(69, 13);
-            this.lbl_organization.TabIndex = 13;
-            this.lbl_organization.Text = "Organization:";
-            // 
-            // lbl_department
-            // 
-            this.lbl_department.AutoSize = true;
-            this.lbl_department.Location = new System.Drawing.Point(218, 305);
-            this.lbl_department.Name = "lbl_department";
-            this.lbl_department.Size = new System.Drawing.Size(65, 13);
-            this.lbl_department.TabIndex = 14;
-            this.lbl_department.Text = "Department:";
-            // 
-            // lbl_city
-            // 
-            this.lbl_city.AutoSize = true;
-            this.lbl_city.Location = new System.Drawing.Point(218, 349);
-            this.lbl_city.Name = "lbl_city";
-            this.lbl_city.Size = new System.Drawing.Size(27, 13);
-            this.lbl_city.TabIndex = 15;
-            this.lbl_city.Text = "City:";
-            // 
-            // lbl_state
-            // 
-            this.lbl_state.AutoSize = true;
-            this.lbl_state.Location = new System.Drawing.Point(218, 393);
-            this.lbl_state.Name = "lbl_state";
-            this.lbl_state.Size = new System.Drawing.Size(35, 13);
-            this.lbl_state.TabIndex = 16;
-            this.lbl_state.Text = "State:";
-            // 
-            // lbl_country
-            // 
-            this.lbl_country.AutoSize = true;
-            this.lbl_country.Location = new System.Drawing.Point(218, 431);
-            this.lbl_country.Name = "lbl_country";
-            this.lbl_country.Size = new System.Drawing.Size(46, 13);
-            this.lbl_country.TabIndex = 17;
-            this.lbl_country.Text = "Country:";
-            // 
-            // tb_subAltNames
-            // 
-            this.tb_subAltNames.Location = new System.Drawing.Point(211, 145);
-            this.tb_subAltNames.Multiline = true;
-            this.tb_subAltNames.Name = "tb_subAltNames";
-            this.tb_subAltNames.Size = new System.Drawing.Size(147, 99);
-            this.tb_subAltNames.TabIndex = 18;
-            // 
-            // overviewBackBtn
-            // 
-            this.overviewBackBtn.Location = new System.Drawing.Point(35, 487);
-            this.overviewBackBtn.Name = "overviewBackBtn";
-            this.overviewBackBtn.Size = new System.Drawing.Size(145, 31);
-            this.overviewBackBtn.TabIndex = 29;
-            this.overviewBackBtn.Text = "< back";
-            this.overviewBackBtn.UseVisualStyleBackColor = true;
-            this.overviewBackBtn.Click += new System.EventHandler(this.overviewBackBtn_Click);
-            // 
-            // crtCsrFile
-            // 
-            this.crtCsrFile.Location = new System.Drawing.Point(213, 487);
-            this.crtCsrFile.Name = "crtCsrFile";
-            this.crtCsrFile.Size = new System.Drawing.Size(145, 31);
-            this.crtCsrFile.TabIndex = 30;
-            this.crtCsrFile.Text = "create certificate file";
-            this.crtCsrFile.UseVisualStyleBackColor = true;
-            this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
-            // 
-            // lbl_info_private_key
-            // 
-            this.lbl_info_private_key.AutoSize = true;
-            this.lbl_info_private_key.Location = new System.Drawing.Point(40, 40);
-            this.lbl_info_private_key.Name = "lbl_info_private_key";
-            this.lbl_info_private_key.Size = new System.Drawing.Size(41, 13);
-            this.lbl_info_private_key.TabIndex = 1;
-            this.lbl_info_private_key.Text = "label14";
+            this.lbl_selectedCsrFile.AutoSize = true;
+            this.lbl_selectedCsrFile.Location = new System.Drawing.Point(165, 93);
+            this.lbl_selectedCsrFile.Name = "lbl_selectedCsrFile";
+            this.lbl_selectedCsrFile.Size = new System.Drawing.Size(41, 13);
+            this.lbl_selectedCsrFile.TabIndex = 3;
+            this.lbl_selectedCsrFile.Text = "label16";
             // 
             // openCsrFileBtn
             // 
@@ -552,33 +517,62 @@
             this.openCsrFileBtn.UseVisualStyleBackColor = true;
             this.openCsrFileBtn.Click += new System.EventHandler(this.openCsrFileBtn_Click);
             // 
-            // lbl_selectedCsrFile
+            // lbl_info_private_key
             // 
-            this.lbl_selectedCsrFile.AutoSize = true;
-            this.lbl_selectedCsrFile.Location = new System.Drawing.Point(165, 93);
-            this.lbl_selectedCsrFile.Name = "lbl_selectedCsrFile";
-            this.lbl_selectedCsrFile.Size = new System.Drawing.Size(41, 13);
-            this.lbl_selectedCsrFile.TabIndex = 3;
-            this.lbl_selectedCsrFile.Text = "label16";
+            this.lbl_info_private_key.AutoSize = true;
+            this.lbl_info_private_key.Location = new System.Drawing.Point(40, 40);
+            this.lbl_info_private_key.Name = "lbl_info_private_key";
+            this.lbl_info_private_key.Size = new System.Drawing.Size(41, 13);
+            this.lbl_info_private_key.TabIndex = 1;
+            this.lbl_info_private_key.Text = "label14";
             // 
-            // lb_clickPrivateKeyBtn
+            // tb_overview_domain
             // 
-            this.lb_clickPrivateKeyBtn.AutoSize = true;
-            this.lb_clickPrivateKeyBtn.Location = new System.Drawing.Point(40, 153);
-            this.lb_clickPrivateKeyBtn.Name = "lb_clickPrivateKeyBtn";
-            this.lb_clickPrivateKeyBtn.Size = new System.Drawing.Size(41, 13);
-            this.lb_clickPrivateKeyBtn.TabIndex = 4;
-            this.lb_clickPrivateKeyBtn.Text = "label15";
+            this.tb_overview_domain.Location = new System.Drawing.Point(211, 109);
+            this.tb_overview_domain.Multiline = true;
+            this.tb_overview_domain.Name = "tb_overview_domain";
+            this.tb_overview_domain.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_domain.TabIndex = 31;
             // 
-            // createPrivateKeyBtn
+            // tb_overview_organization
             // 
-            this.createPrivateKeyBtn.Location = new System.Drawing.Point(43, 206);
-            this.createPrivateKeyBtn.Name = "createPrivateKeyBtn";
-            this.createPrivateKeyBtn.Size = new System.Drawing.Size(107, 29);
-            this.createPrivateKeyBtn.TabIndex = 5;
-            this.createPrivateKeyBtn.Text = "create private key";
-            this.createPrivateKeyBtn.UseVisualStyleBackColor = true;
-            this.createPrivateKeyBtn.Click += new System.EventHandler(this.createPrivateKeyBtn_Click);
+            this.tb_overview_organization.Location = new System.Drawing.Point(211, 262);
+            this.tb_overview_organization.Multiline = true;
+            this.tb_overview_organization.Name = "tb_overview_organization";
+            this.tb_overview_organization.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_organization.TabIndex = 32;
+            // 
+            // tb_overview_department
+            // 
+            this.tb_overview_department.Location = new System.Drawing.Point(211, 302);
+            this.tb_overview_department.Multiline = true;
+            this.tb_overview_department.Name = "tb_overview_department";
+            this.tb_overview_department.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_department.TabIndex = 33;
+            // 
+            // tb_overview_city
+            // 
+            this.tb_overview_city.Location = new System.Drawing.Point(211, 346);
+            this.tb_overview_city.Multiline = true;
+            this.tb_overview_city.Name = "tb_overview_city";
+            this.tb_overview_city.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_city.TabIndex = 34;
+            // 
+            // tb_overview_state
+            // 
+            this.tb_overview_state.Location = new System.Drawing.Point(211, 390);
+            this.tb_overview_state.Multiline = true;
+            this.tb_overview_state.Name = "tb_overview_state";
+            this.tb_overview_state.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_state.TabIndex = 35;
+            // 
+            // tb_overview_country
+            // 
+            this.tb_overview_country.Location = new System.Drawing.Point(211, 431);
+            this.tb_overview_country.Multiline = true;
+            this.tb_overview_country.Name = "tb_overview_country";
+            this.tb_overview_country.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_country.TabIndex = 36;
             // 
             // lblname
             // 
@@ -641,13 +635,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lbl_domain;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label lbl_organization;
-        private System.Windows.Forms.Label lbl_department;
-        private System.Windows.Forms.Label lbl_city;
-        private System.Windows.Forms.Label lbl_state;
-        private System.Windows.Forms.Label lbl_country;
         private System.Windows.Forms.TextBox tb_subAltNames;
         private System.Windows.Forms.Button overviewBackBtn;
         private System.Windows.Forms.Button crtCsrFile;
@@ -656,6 +644,12 @@
         private System.Windows.Forms.Label lbl_selectedCsrFile;
         private System.Windows.Forms.Label lb_clickPrivateKeyBtn;
         private System.Windows.Forms.Button createPrivateKeyBtn;
+        private System.Windows.Forms.TextBox tb_overview_domain;
+        private System.Windows.Forms.TextBox tb_overview_organization;
+        private System.Windows.Forms.TextBox tb_overview_department;
+        private System.Windows.Forms.TextBox tb_overview_city;
+        private System.Windows.Forms.TextBox tb_overview_state;
+        private System.Windows.Forms.TextBox tb_overview_country;
     }
 }
 
