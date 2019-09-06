@@ -79,14 +79,14 @@ namespace CertReqClient
                     if (sanName.ToLowerInvariant().StartsWith("dns"))
                     {
                         // Set Alternative DNS Name
-                        string cleanedName = sanName.Replace("dns=", string.Empty);
+                        string cleanedName = sanName.Replace(messages.dnsEquals, string.Empty);
                         objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, cleanedName);
                         objAlternativeNames.Add(objRfc822Name);
                     }
                     else if (sanName.ToLowerInvariant().StartsWith("ipaddress"))
                     {
                         // Set Alternative IP-Adress
-                        string cleanedName = sanName.Replace("ipaddress=", string.Empty);
+                        string cleanedName = sanName.Replace(messages.ipaddressEquals, string.Empty);
                         IPAddress ipAddress;
                         if (IPAddress.TryParse(cleanedName, out ipAddress))
                         {
