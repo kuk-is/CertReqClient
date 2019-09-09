@@ -47,6 +47,8 @@ namespace CertReqClient
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
+                    // Final Page messages
+                    finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
@@ -371,6 +373,15 @@ namespace CertReqClient
         private void goToNextPage(string tabNumber)
         {
             tabControl1.SelectTab(tabNumber);
+        }
+
+
+        private void finalPageMessage() {
+
+            string installFinished = "Installation Completed!";
+            string finalPageMessage = "Your certificate has been successfully installed. \nYou can now close the installation wizard.";
+            finalPageTxt.Text = finalPageMessage;
+            lbl_installCompleted.Text = installFinished;
         }
     }
 }
