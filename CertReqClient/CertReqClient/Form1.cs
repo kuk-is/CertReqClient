@@ -25,8 +25,8 @@ namespace CertReqClient
             // Calling FillCountryDropDown() Method
             FillCountryDropDown();
 
-            subjectType.Items.Add("DNS-Name");
-            subjectType.Items.Add("IP-Address");
+            subjectType.Items.Add(messages.dnsName);
+            subjectType.Items.Add(messages.ipAddress);
 
             // enable textbox by default
             textbox_alternativeNames.Enabled = false;
@@ -50,12 +50,12 @@ namespace CertReqClient
                 }
                 else {
                     string specialChar = string.Join("", specialCharacters);
-                    MessageBox.Show("The following Characters are not allowed: " + specialChar);
+                    MessageBox.Show(messages.charactersNotAllowed + " " + specialChar);
                 }
             }
             else
             {
-                MessageBox.Show("Please enter the Domain.");
+                MessageBox.Show(messages.enterDomain);
             }
         }
 
@@ -136,10 +136,10 @@ namespace CertReqClient
                 switch (subjectType.Text)
                 {
                     case "DNS-Name":
-                        subjectTypeName = "dns=";
+                        subjectTypeName = messages.dnsEquals;
                         break;
                     case "IP-Address":
-                        subjectTypeName = "ipaddress=";
+                        subjectTypeName = messages.ipaddressEquals;
                         break;
                     default:
                         break;
@@ -151,7 +151,7 @@ namespace CertReqClient
             }
             else
             {
-                MessageBox.Show("Subject Alernative Name or SAN Type is missing.");
+                MessageBox.Show(messages.missingSAN);
             }
         }
 
@@ -184,12 +184,12 @@ namespace CertReqClient
             if (textbox_alternativeNames.Enabled == false)
             {
                 textbox_alternativeNames.Enabled = true;
-                editSAN.Text = "close edit mode";
+                editSAN.Text = messages.closeEditMode;
             }
             else if (textbox_alternativeNames.Enabled == true)
             {
                 textbox_alternativeNames.Enabled = false;
-                editSAN.Text = "edit SAN";
+                editSAN.Text = messages.editSan;
             }   
         }
 
@@ -203,7 +203,7 @@ namespace CertReqClient
             }
             else
             {
-                MessageBox.Show("Please enter the Domain.");
+                MessageBox.Show(messages.enterDomain);
             }
         }
 
@@ -244,14 +244,13 @@ namespace CertReqClient
 
             if (!string.IsNullOrWhiteSpace(path))
             {
-                dialogResult = MessageBox.Show("File has been successfully created!\r Do you want to create the private key now? ", "",MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dialogResult = MessageBox.Show(messages.csrCreated + " ", "",MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
                     tabControl1.SelectTab(tabPage3);
-                    string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
                     lb_clickPrivateKeyBtn.Text = "";
                     lbl_selectedCsrFile.Text = "";
-                    lbl_info_private_key.Text = privateInfoTxt;
+                    lbl_info_private_key.Text = messages.privateKeyMessage;
                 }
                 else
                 {
@@ -283,7 +282,7 @@ namespace CertReqClient
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
                 lbl_selectedCsrFile.Text = selectedFileName;
-                lb_clickPrivateKeyBtn.Text = "You can now create the private key by clicking the \"create private key\" Button";
+                lb_clickPrivateKeyBtn.Text = messages.crtPrivateKey;
                 createPrivateKeyBtn.Visible = true;
             }
             
@@ -297,7 +296,7 @@ namespace CertReqClient
             myConsole.SubmitCertificate(path);
             if (File.Exists(path + ".cer"))
             {
-                dialogResult = MessageBox.Show("The private key file has been successfully created!\r Do you want to install the certificate now? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dialogResult = MessageBox.Show(messages.installCertificate + " ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
                     // installing the certificate
@@ -311,7 +310,7 @@ namespace CertReqClient
             }
             else
             {
-                MessageBox.Show("An error occured, please contact your administrator.");
+                MessageBox.Show(messages.certificateFileNotCreated);
             }
         }
 

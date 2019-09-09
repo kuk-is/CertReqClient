@@ -9,7 +9,7 @@ namespace CertReqClient
         public void SubmitCertificate(string path) {
             Process Pro = new Process();
                                   
-            Pro.StartInfo.FileName = "certreq.exe";
+            Pro.StartInfo.FileName = messages.certreqExe;
             Pro.StartInfo.Arguments = "-submit -attrib \"CertificateTemplate: webserver\" "  + path + ".txt "  + path + ".cer " + " " + path + ".pfx";
             
             Pro.Start();
@@ -22,7 +22,7 @@ namespace CertReqClient
         public void AcceptCertificate(string path) {
             Process P = new Process();
 
-            P.StartInfo.FileName = "certreq.exe";
+            P.StartInfo.FileName = messages.certreqExe;
             P.StartInfo.Arguments = "-accept " + path + ".cer";
             P.Start();
 
