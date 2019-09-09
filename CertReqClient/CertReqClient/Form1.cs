@@ -216,18 +216,21 @@ namespace CertReqClient
             tb_subAltNames.WordWrap = false;
             tb_subAltNames.ReadOnly = true;
 
-            lbl_domain.Text = myRequest.CommonName;
+            // set textboxes to ReadOnly
+            SetTbReadOnly();
+
+            tb_overview_domain.Text = myRequest.CommonName;
             tb_subAltNames.Text = myRequest.SubjectAlternativeName;
-            lbl_organization.Text = myRequest.Organization;
-            lbl_department.Text = myRequest.Department;
-            lbl_city.Text = myRequest.City;
-            lbl_state.Text = myRequest.State;
+            tb_overview_organization.Text = myRequest.Organization;
+            tb_overview_department.Text = myRequest.Department;
+            tb_overview_city.Text = myRequest.City;
+            tb_overview_state.Text = myRequest.State;
             
             var splitString = comboBox_country.SelectedItem.ToString().Split(',');
             string firstSplit = splitString[1];
 
             var splitSpecialChar = firstSplit.Split(']');
-            lbl_country.Text = splitSpecialChar[0];
+            tb_overview_country.Text = splitSpecialChar[0];
         }
 
 
@@ -333,6 +336,17 @@ namespace CertReqClient
                 selectedFileName = openFileDialog1.FileName;
             }
             return selectedFileName;
+        }
+
+
+        private void SetTbReadOnly() {
+
+            tb_overview_domain.Enabled = false;
+            tb_overview_organization.Enabled = false;
+            tb_overview_department.Enabled = false;
+            tb_overview_city.Enabled = false;
+            tb_overview_state.Enabled = false;
+            tb_overview_country.Enabled = false;
         }
     }
 }
