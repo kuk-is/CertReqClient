@@ -323,6 +323,8 @@ namespace CertReqClient
                 {
                     // installing the certificate
                     myConsole.AcceptCertificate(path);
+                    // Final Page messages
+                    finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
@@ -382,6 +384,12 @@ namespace CertReqClient
             string finalPageMessage = "Your certificate has been successfully installed. \nYou can now close the installation wizard.";
             finalPageTxt.Text = finalPageMessage;
             lbl_installCompleted.Text = installFinished;
+        }
+
+
+        private void btnCloseApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

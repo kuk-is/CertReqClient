@@ -82,6 +82,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.finalPageTxt = new System.Windows.Forms.Label();
             this.lbl_installCompleted = new System.Windows.Forms.Label();
+            this.btnCloseApp = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -582,6 +583,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage4.Controls.Add(this.btnCloseApp);
             this.tabPage4.Controls.Add(this.lbl_installCompleted);
             this.tabPage4.Controls.Add(this.finalPageTxt);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -608,6 +610,16 @@
             this.lbl_installCompleted.Size = new System.Drawing.Size(54, 18);
             this.lbl_installCompleted.TabIndex = 1;
             this.lbl_installCompleted.Text = "label18";
+            // 
+            // btnCloseApp
+            // 
+            this.btnCloseApp.Location = new System.Drawing.Point(50, 155);
+            this.btnCloseApp.Name = "btnCloseApp";
+            this.btnCloseApp.Size = new System.Drawing.Size(107, 29);
+            this.btnCloseApp.TabIndex = 6;
+            this.btnCloseApp.Text = "close application";
+            this.btnCloseApp.UseVisualStyleBackColor = true;
+            this.btnCloseApp.Click += new System.EventHandler(this.btnCloseApp_Click);
             // 
             // lblname
             // 
@@ -690,6 +702,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label finalPageTxt;
         private System.Windows.Forms.Label lbl_installCompleted;
+        private System.Windows.Forms.Button btnCloseApp;
     }
 }
 
