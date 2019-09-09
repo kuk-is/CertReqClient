@@ -198,8 +198,19 @@ namespace CertReqClient
         {
             if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
             {
-                tabControl1.SelectTab(tabPage2);
-                SetDataForOverview();
+                CertificateRequest myRequest = ReadInputValues();
+                List<string> specialCharacters = GetSpecialCharacter(myRequest);
+
+                if (specialCharacters.Count <= 0)
+                {
+                    tabControl1.SelectTab(tabPage2);
+                    SetDataForOverview();
+                }
+                else
+                {
+                    string specialChar = string.Join("", specialCharacters);
+                    MessageBox.Show("The following Characters are not allowed: " + specialChar);
+                }
             }
             else
             {
