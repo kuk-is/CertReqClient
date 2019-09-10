@@ -120,11 +120,8 @@
   <data name="certificateFileNotCreated" xml:space="preserve">
     <value>MessageBox.Show(messages.certificateFileNotCreated.</value>
   </data>
-  <data name="certreqExe" xml:space="preserve">
-    <value>certreq.exe</value>
-  </data>
   <data name="charactersNotAllowed" xml:space="preserve">
-    <value>The following Characters are not allowed:</value>
+    <value>The following Characters are not allowed: {0}</value>
   </data>
   <data name="closeEditMode" xml:space="preserve">
     <value>close edit mode</value>
