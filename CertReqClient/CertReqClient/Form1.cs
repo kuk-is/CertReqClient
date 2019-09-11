@@ -93,9 +93,8 @@ namespace CertReqClient
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
-                var request = myCerHandler.GenerateSigningRequest(myRequest);
-
-                File.WriteAllText(filename, request);
+                // Create Request File
+                CreateFile(myRequest, myCerHandler, filename);
 
                 // create full path for console commands
                 string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
@@ -350,6 +349,12 @@ namespace CertReqClient
             tb_overview_city.Enabled = false;
             tb_overview_state.Enabled = false;
             tb_overview_country.Enabled = false;
+        }
+
+        private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
+        {
+            var request = myCerHandler.GenerateSigningRequest(myRequest);
+            File.WriteAllText(filename, request);
         }
     }
 }
