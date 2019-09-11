@@ -98,7 +98,7 @@ namespace CertReqClient
                 File.WriteAllText(filename, request);
 
                 // create full path for console commands
-                string path = Path.GetDirectoryName(filename) + "/" + Path.GetFileNameWithoutExtension(filename);
+                string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
 
                 return path;
             }
