@@ -70,16 +70,7 @@ namespace CertReqClient {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die certreq.exe ähnelt.
-        /// </summary>
-        internal static string certreqExe {
-            get {
-                return ResourceManager.GetString("certreqExe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The following Characters are not allowed: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The following Characters are not allowed: {0} ähnelt.
         /// </summary>
         internal static string charactersNotAllowed {
             get {

@@ -76,19 +76,18 @@ namespace CertReqClient
                     CAlternativeName objRfc822Name = new CAlternativeName();
 
                     
-                    if (sanName.ToLowerInvariant().StartsWith("dns"))
+                    if (sanName.StartsWith("dns", StringComparison.InvariantCultureIgnoreCase))
                     {
                         // Set Alternative DNS Name
                         string cleanedName = sanName.Replace(messages.dnsEquals, string.Empty);
                         objRfc822Name.InitializeFromString(AlternativeNameType.XCN_CERT_ALT_NAME_DNS_NAME, cleanedName);
                         objAlternativeNames.Add(objRfc822Name);
                     }
-                    else if (sanName.ToLowerInvariant().StartsWith("ipaddress"))
+                    else if (sanName.StartsWith("ipaddress", StringComparison.InvariantCultureIgnoreCase))
                     {
                         // Set Alternative IP-Adress
                         string cleanedName = sanName.Replace(messages.ipaddressEquals, string.Empty);
-                        IPAddress ipAddress;
-                        if (IPAddress.TryParse(cleanedName, out ipAddress))
+                        if (IPAddress.TryParse(cleanedName, out IPAddress ipAddress))
                         {
                             string ipBase64 = Convert.ToBase64String(ipAddress.GetAddressBytes());
                             objRfc822Name.InitializeFromRawData(AlternativeNameType.XCN_CERT_ALT_NAME_IP_ADDRESS, EncodingType.XCN_CRYPT_STRING_BASE64, ipBase64);
