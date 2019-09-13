@@ -49,6 +49,8 @@ namespace CertReqClient
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
+                    // switch to next Tab
+                    goToNextPage("tabPage4");
                 }
                 else
                 {
@@ -202,7 +204,8 @@ namespace CertReqClient
 
                 if (specialCharacters.Count() <= 0)
                 {
-                    tabControl1.SelectTab(tabPage2);
+                    // switch to next Tab
+                    goToNextPage("tabPage2");
                     SetDataForOverview();
                 }
                 else
@@ -241,7 +244,8 @@ namespace CertReqClient
 
         private void overviewBackBtn_Click(object sender, EventArgs e)
         {
-             tabControl1.SelectTab(tabPage1);
+            // switch to next Tab
+            goToNextPage("tabPage1");
         }
 
         private void crtCsrFile_Click(object sender, EventArgs e)
@@ -255,7 +259,10 @@ namespace CertReqClient
                 DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    tabControl1.SelectTab(tabPage3);
+                    // switch to next Tab
+                    goToNextPage("tabPage3");
+                    string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
+
                     lb_clickPrivateKeyBtn.Text = "";
                     lbl_selectedCsrFile.Text = "";
                     lbl_info_private_key.Text = messages.privateKeyMessage;
@@ -307,6 +314,8 @@ namespace CertReqClient
                 {
                     // installing the certificate
                     myConsole.AcceptCertificate(path);
+                    // switch to next Tab
+                    goToNextPage("tabPage4");
                 }
                 else
                 {
@@ -350,6 +359,14 @@ namespace CertReqClient
             tb_overview_state.Enabled = false;
             tb_overview_country.Enabled = false;
         }
+
+
+        private void goToNextPage(string tabNumber)
+        {
+            tabControl1.SelectTab(tabNumber);
+        }
+    }
+}
 
         private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
         {

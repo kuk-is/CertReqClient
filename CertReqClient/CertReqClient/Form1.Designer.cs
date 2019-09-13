@@ -55,6 +55,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_City = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tb_overview_country = new System.Windows.Forms.TextBox();
+            this.tb_overview_state = new System.Windows.Forms.TextBox();
+            this.tb_overview_city = new System.Windows.Forms.TextBox();
+            this.tb_overview_department = new System.Windows.Forms.TextBox();
+            this.tb_overview_organization = new System.Windows.Forms.TextBox();
+            this.tb_overview_domain = new System.Windows.Forms.TextBox();
             this.crtCsrFile = new System.Windows.Forms.Button();
             this.overviewBackBtn = new System.Windows.Forms.Button();
             this.tb_subAltNames = new System.Windows.Forms.TextBox();
@@ -73,12 +79,7 @@
             this.lbl_selectedCsrFile = new System.Windows.Forms.Label();
             this.openCsrFileBtn = new System.Windows.Forms.Button();
             this.lbl_info_private_key = new System.Windows.Forms.Label();
-            this.tb_overview_domain = new System.Windows.Forms.TextBox();
-            this.tb_overview_organization = new System.Windows.Forms.TextBox();
-            this.tb_overview_department = new System.Windows.Forms.TextBox();
-            this.tb_overview_city = new System.Windows.Forms.TextBox();
-            this.tb_overview_state = new System.Windows.Forms.TextBox();
-            this.tb_overview_country = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -106,6 +107,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(-5, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -355,6 +357,54 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
+            // tb_overview_country
+            // 
+            this.tb_overview_country.Location = new System.Drawing.Point(211, 431);
+            this.tb_overview_country.Multiline = true;
+            this.tb_overview_country.Name = "tb_overview_country";
+            this.tb_overview_country.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_country.TabIndex = 36;
+            // 
+            // tb_overview_state
+            // 
+            this.tb_overview_state.Location = new System.Drawing.Point(211, 390);
+            this.tb_overview_state.Multiline = true;
+            this.tb_overview_state.Name = "tb_overview_state";
+            this.tb_overview_state.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_state.TabIndex = 35;
+            // 
+            // tb_overview_city
+            // 
+            this.tb_overview_city.Location = new System.Drawing.Point(211, 346);
+            this.tb_overview_city.Multiline = true;
+            this.tb_overview_city.Name = "tb_overview_city";
+            this.tb_overview_city.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_city.TabIndex = 34;
+            // 
+            // tb_overview_department
+            // 
+            this.tb_overview_department.Location = new System.Drawing.Point(211, 302);
+            this.tb_overview_department.Multiline = true;
+            this.tb_overview_department.Name = "tb_overview_department";
+            this.tb_overview_department.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_department.TabIndex = 33;
+            // 
+            // tb_overview_organization
+            // 
+            this.tb_overview_organization.Location = new System.Drawing.Point(211, 262);
+            this.tb_overview_organization.Multiline = true;
+            this.tb_overview_organization.Name = "tb_overview_organization";
+            this.tb_overview_organization.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_organization.TabIndex = 32;
+            // 
+            // tb_overview_domain
+            // 
+            this.tb_overview_domain.Location = new System.Drawing.Point(211, 109);
+            this.tb_overview_domain.Multiline = true;
+            this.tb_overview_domain.Name = "tb_overview_domain";
+            this.tb_overview_domain.Size = new System.Drawing.Size(147, 26);
+            this.tb_overview_domain.TabIndex = 31;
+            // 
             // crtCsrFile
             // 
             this.crtCsrFile.Location = new System.Drawing.Point(213, 487);
@@ -526,53 +576,14 @@
             this.lbl_info_private_key.TabIndex = 1;
             this.lbl_info_private_key.Text = "label14";
             // 
-            // tb_overview_domain
+            // tabPage4
             // 
-            this.tb_overview_domain.Location = new System.Drawing.Point(211, 109);
-            this.tb_overview_domain.Multiline = true;
-            this.tb_overview_domain.Name = "tb_overview_domain";
-            this.tb_overview_domain.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_domain.TabIndex = 31;
-            // 
-            // tb_overview_organization
-            // 
-            this.tb_overview_organization.Location = new System.Drawing.Point(211, 262);
-            this.tb_overview_organization.Multiline = true;
-            this.tb_overview_organization.Name = "tb_overview_organization";
-            this.tb_overview_organization.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_organization.TabIndex = 32;
-            // 
-            // tb_overview_department
-            // 
-            this.tb_overview_department.Location = new System.Drawing.Point(211, 302);
-            this.tb_overview_department.Multiline = true;
-            this.tb_overview_department.Name = "tb_overview_department";
-            this.tb_overview_department.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_department.TabIndex = 33;
-            // 
-            // tb_overview_city
-            // 
-            this.tb_overview_city.Location = new System.Drawing.Point(211, 346);
-            this.tb_overview_city.Multiline = true;
-            this.tb_overview_city.Name = "tb_overview_city";
-            this.tb_overview_city.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_city.TabIndex = 34;
-            // 
-            // tb_overview_state
-            // 
-            this.tb_overview_state.Location = new System.Drawing.Point(211, 390);
-            this.tb_overview_state.Multiline = true;
-            this.tb_overview_state.Name = "tb_overview_state";
-            this.tb_overview_state.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_state.TabIndex = 35;
-            // 
-            // tb_overview_country
-            // 
-            this.tb_overview_country.Location = new System.Drawing.Point(211, 431);
-            this.tb_overview_country.Multiline = true;
-            this.tb_overview_country.Name = "tb_overview_country";
-            this.tb_overview_country.Size = new System.Drawing.Size(147, 26);
-            this.tb_overview_country.TabIndex = 36;
+            this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(480, 600);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
             // 
             // lblname
             // 
@@ -650,6 +661,7 @@
         private System.Windows.Forms.TextBox tb_overview_city;
         private System.Windows.Forms.TextBox tb_overview_state;
         private System.Windows.Forms.TextBox tb_overview_country;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 
