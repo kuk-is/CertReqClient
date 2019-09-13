@@ -378,13 +378,10 @@ namespace CertReqClient
             lbl_installCompleted.Text = installFinished;
         }
 
-
         private void btnCloseApp_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-    }
-}
 
         private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
         {
@@ -393,3 +390,5 @@ namespace CertReqClient
         }
     }
 }
+
+        
