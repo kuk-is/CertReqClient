@@ -80,10 +80,13 @@
             this.openCsrFileBtn = new System.Windows.Forms.Button();
             this.lbl_info_private_key = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.finalPageTxt = new System.Windows.Forms.Label();
+            this.lbl_installCompleted = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_error_required_field
@@ -579,11 +582,32 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage4.Controls.Add(this.lbl_installCompleted);
+            this.tabPage4.Controls.Add(this.finalPageTxt);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(480, 600);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
+            // 
+            // finalPageTxt
+            // 
+            this.finalPageTxt.AutoSize = true;
+            this.finalPageTxt.Location = new System.Drawing.Point(47, 82);
+            this.finalPageTxt.Name = "finalPageTxt";
+            this.finalPageTxt.Size = new System.Drawing.Size(41, 13);
+            this.finalPageTxt.TabIndex = 0;
+            this.finalPageTxt.Text = "label17";
+            // 
+            // lbl_installCompleted
+            // 
+            this.lbl_installCompleted.AutoSize = true;
+            this.lbl_installCompleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_installCompleted.Location = new System.Drawing.Point(47, 30);
+            this.lbl_installCompleted.Name = "lbl_installCompleted";
+            this.lbl_installCompleted.Size = new System.Drawing.Size(54, 18);
+            this.lbl_installCompleted.TabIndex = 1;
+            this.lbl_installCompleted.Text = "label18";
             // 
             // lblname
             // 
@@ -605,6 +629,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -662,6 +688,8 @@
         private System.Windows.Forms.TextBox tb_overview_state;
         private System.Windows.Forms.TextBox tb_overview_country;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label finalPageTxt;
+        private System.Windows.Forms.Label lbl_installCompleted;
     }
 }
 

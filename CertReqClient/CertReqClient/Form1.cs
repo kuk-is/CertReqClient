@@ -49,6 +49,8 @@ namespace CertReqClient
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
+                    // Final Page messages
+                    finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
@@ -262,7 +264,7 @@ namespace CertReqClient
                     // switch to next Tab
                     goToNextPage("tabPage3");
                     string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
-
+                    
                     lb_clickPrivateKeyBtn.Text = "";
                     lbl_selectedCsrFile.Text = "";
                     lbl_info_private_key.Text = messages.privateKeyMessage;
@@ -364,6 +366,15 @@ namespace CertReqClient
         private void goToNextPage(string tabNumber)
         {
             tabControl1.SelectTab(tabNumber);
+        }
+
+
+        private void finalPageMessage() {
+
+            string installFinished = "Installation Completed!";
+            string finalPageMessage = "Your certificate has been successfully installed. \nYou can now close the installation wizard.";
+            finalPageTxt.Text = finalPageMessage;
+            lbl_installCompleted.Text = installFinished;
         }
     }
 }
