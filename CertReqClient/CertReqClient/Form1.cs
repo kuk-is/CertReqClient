@@ -17,8 +17,6 @@ namespace CertReqClient
         }
 
         CertreqConsole myConsole = new CertreqConsole();
-        CertificateRequest myRequest = new CertificateRequest();
-        DialogResult dialogResult;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -32,7 +30,11 @@ namespace CertReqClient
             textbox_alternativeNames.Enabled = false;
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"><see cref="btn_generate"/></param>
+        /// <param name="e">event arguments</param>
         private void Btn_generate_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
@@ -40,8 +42,8 @@ namespace CertReqClient
                 // Read all Input Fields
                 CertificateRequest myRequest = ReadInputValues();
 
-                List<string> specialCharacters = GetSpecialCharacter(myRequest);
-                if (specialCharacters.Count <= 0)
+                IEnumerable<string> specialCharacters = GetSpecialCharacter(myRequest);
+                if (specialCharacters.Count() <= 0)
                 {
                     string path = SaveCsrFile(myConsole, myRequest);
                     // calling method for console commands
@@ -52,9 +54,10 @@ namespace CertReqClient
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
-                else {
+                else
+                {
                     string specialChar = string.Join("", specialCharacters);
-                    MessageBox.Show(messages.charactersNotAllowed + " " + specialChar);
+                    MessageBox.Show(string.Format(messages.charactersNotAllowed, specialChar));
                 }
             }
             else
@@ -65,6 +68,7 @@ namespace CertReqClient
 
         private CertificateRequest ReadInputValues()
         {
+            CertificateRequest myRequest = new CertificateRequest();
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;            
             myRequest.Organization = textbox_organization.Text;
@@ -75,12 +79,12 @@ namespace CertReqClient
             return myRequest;
         }
 
-        private SaveFileDialog SaveDialogSettings(CertificateRequest myRequest)
+        private SaveFileDialog SaveDialogSettings(string filename)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FileName = myRequest.CommonName + ".txt";
+            saveFileDialog1.FileName = filename + ".txt";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -93,18 +97,16 @@ namespace CertReqClient
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
-                var request = myCerHandler.GenerateSigningRequest(myRequest);
-
-                File.WriteAllText(filename, request);
+                // Create Request File
+                CreateFile(myRequest, myCerHandler, filename);
 
                 // create full path for console commands
-                string path = Path.GetDirectoryName(filename) + "/" + Path.GetFileNameWithoutExtension(filename);
+                string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
 
                 return path;
             }
             return null;
         }
-
 
         private void FillCountryDropDown()
         {
@@ -129,20 +131,19 @@ namespace CertReqClient
             comboBox_country.DataSource = new BindingSource(countries, null);
             comboBox_country.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-        
-                
+            
         private void addSanBtn_Click(object sender, EventArgs e)
         {
             //if (subjectTypeInput.Text != "" )
             if (!String.IsNullOrEmpty(subjectTypeInput.Text) && (!String.IsNullOrEmpty(subjectType.Text)))
             {
                 string subjectTypeName = "";
-                switch (subjectType.Text)
+                switch (subjectType.SelectedIndex)
                 {
-                    case "DNS-Name":
+                    case 0: // DNS-Name
                         subjectTypeName = messages.dnsEquals;
                         break;
-                    case "IP-Address":
+                    case 1: // IP-Address
                         subjectTypeName = messages.ipaddressEquals;
                         break;
                     default:
@@ -159,22 +160,29 @@ namespace CertReqClient
             }
         }
 
-
-        private List<string> GetSpecialCharacter(CertificateRequest myRequest)
+        private HashSet<string> GetSpecialCharacter(CertificateRequest myRequest)
         {
             string[] specialChars = new string[] { "+", ",", "\"", ";"};
-            List<string> charsIn = new List<string>();
-            string[] inputFields = new string[] {myRequest.Organization, myRequest.CommonName, myRequest.Department, myRequest.City, myRequest.State, myRequest.Country};
-
-            foreach (var item in specialChars)
+            HashSet<string> charsIn = new HashSet<string>();
+            string[] inputFields = new string[]
             {
-                foreach (var fields in inputFields)
+                myRequest.Organization,
+                myRequest.CommonName,
+                myRequest.Department,
+                myRequest.City,
+                myRequest.State,
+                myRequest.Country
+            };
+
+            foreach (string specialChar in specialChars)
+            {
+                foreach (string field in inputFields)
                 {
-                    if (fields.Contains(item))
+                    if (field.Contains(specialChar))
                     {
-                        if (!charsIn.Contains(item))
+                        if (!charsIn.Contains(specialChar))
                         {
-                            charsIn.Add(item);
+                            charsIn.Add(specialChar);
                         }
                     }
                 }
@@ -185,27 +193,18 @@ namespace CertReqClient
 
         private void editSAN_Click(object sender, EventArgs e)
         {
-            if (textbox_alternativeNames.Enabled == false)
-            {
-                textbox_alternativeNames.Enabled = true;
-                editSAN.Text = messages.closeEditMode;
-            }
-            else if (textbox_alternativeNames.Enabled == true)
-            {
-                textbox_alternativeNames.Enabled = false;
-                editSAN.Text = messages.editSan;
-            }   
+            editSAN.Text = textbox_alternativeNames.Enabled ? messages.editSan : messages.closeEditMode;
+            textbox_alternativeNames.Enabled = !textbox_alternativeNames.Enabled;
         }
-
 
         private void generateCsrBtn_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(textBox_commonName.Text) && (!String.IsNullOrWhiteSpace(textBox_commonName.Text)))
+            if (!string.IsNullOrWhiteSpace(textBox_commonName.Text))
             {
                 CertificateRequest myRequest = ReadInputValues();
-                List<string> specialCharacters = GetSpecialCharacter(myRequest);
+                IEnumerable<string> specialCharacters = GetSpecialCharacter(myRequest);
 
-                if (specialCharacters.Count <= 0)
+                if (specialCharacters.Count() <= 0)
                 {
                     // switch to next Tab
                     goToNextPage("tabPage2");
@@ -214,7 +213,7 @@ namespace CertReqClient
                 else
                 {
                     string specialChar = string.Join("", specialCharacters);
-                    MessageBox.Show("The following Characters are not allowed: " + specialChar);
+                    MessageBox.Show(messages.charactersNotAllowed, specialChar);
                 }
             }
             else
@@ -223,9 +222,8 @@ namespace CertReqClient
             }
         }
 
-
-        private void SetDataForOverview() {
-
+        private void SetDataForOverview()
+        {
             CertificateRequest myRequest = ReadInputValues();
 
             tb_subAltNames.ScrollBars = ScrollBars.Both;
@@ -242,11 +240,7 @@ namespace CertReqClient
             tb_overview_city.Text = myRequest.City;
             tb_overview_state.Text = myRequest.State;
             
-            var splitString = comboBox_country.SelectedItem.ToString().Split(',');
-            string firstSplit = splitString[1];
-
-            var splitSpecialChar = firstSplit.Split(']');
-            tb_overview_country.Text = splitSpecialChar[0];
+            tb_overview_country.Text = ((KeyValuePair<string, string>)comboBox_country.SelectedItem).Value;
         }
 
 
@@ -256,15 +250,15 @@ namespace CertReqClient
             goToNextPage("tabPage1");
         }
 
-
         private void crtCsrFile_Click(object sender, EventArgs e)
         {
             createPrivateKeyBtn.Visible = false;
+            CertificateRequest myRequest = ReadInputValues();
             string path = SaveCsrFile(myConsole, myRequest);
 
             if (!string.IsNullOrWhiteSpace(path))
             {
-                dialogResult = MessageBox.Show(messages.csrCreated + " ", "",MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
                     // switch to next Tab
@@ -282,21 +276,21 @@ namespace CertReqClient
             }
         }
 
-
         private string SaveCsrFile(CertreqConsole myConsole, CertificateRequest myRequest)
         {
             string path = null;
-            if (GetSpecialCharacter(myRequest).Count <= 0)
+            if (GetSpecialCharacter(myRequest).Count() <= 0)
             {
                 // Define Settings for SaveFileDialog
-                SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest);
+                SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
+
                 // Returns path for Console Class
                 CertificateHandler myCerHandler = new CertificateHandler();
                 path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
             }
+
             return path;
         }
-
 
         private void openCsrFileBtn_Click(object sender, EventArgs e)
         {
@@ -308,18 +302,16 @@ namespace CertReqClient
                 lb_clickPrivateKeyBtn.Text = messages.crtPrivateKey;
                 createPrivateKeyBtn.Visible = true;
             }
-            
         }
-
         
         private void createPrivateKeyBtn_Click(object sender, EventArgs e)
         {
-            string path = Path.GetDirectoryName(lbl_selectedCsrFile.Text) + "/" + Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text);
+            string path = Path.Combine(Path.GetDirectoryName(lbl_selectedCsrFile.Text), Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text));
             // creating the private key
             myConsole.SubmitCertificate(path);
             if (File.Exists(path + ".cer"))
             {
-                dialogResult = MessageBox.Show(messages.installCertificate + " ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult dialogResult = MessageBox.Show(messages.installCertificate, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.Yes)
                 {
                     // installing the certificate
@@ -338,7 +330,6 @@ namespace CertReqClient
             }
         }
 
-
         private OpenFileDialog OpenFileDiaglog()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -346,22 +337,23 @@ namespace CertReqClient
             openFileDialog1.Filter = "Text files (*.txt)|*.txt";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
+
             return openFileDialog1;
         }
 
-
-        private string GetFileName(OpenFileDialog openFileDialog1) {
+        private string GetFileName(OpenFileDialog openFileDialog1)
+        {
             string selectedFileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 selectedFileName = openFileDialog1.FileName;
             }
+
             return selectedFileName;
         }
 
-
-        private void SetTbReadOnly() {
-
+        private void SetTbReadOnly()
+        {
             tb_overview_domain.Enabled = false;
             tb_overview_organization.Enabled = false;
             tb_overview_department.Enabled = false;
@@ -387,3 +379,10 @@ namespace CertReqClient
     }
 }
 
+        private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
+        {
+            var request = myCerHandler.GenerateSigningRequest(myRequest);
+            File.WriteAllText(filename, request);
+        }
+    }
+}
