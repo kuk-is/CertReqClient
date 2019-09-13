@@ -264,7 +264,6 @@ namespace CertReqClient
                     // switch to next Tab
                     goToNextPage("tabPage3");
                     string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
-                    
                     lb_clickPrivateKeyBtn.Text = "";
                     lbl_selectedCsrFile.Text = "";
                     lbl_info_private_key.Text = messages.privateKeyMessage;
@@ -316,6 +315,8 @@ namespace CertReqClient
                 {
                     // installing the certificate
                     myConsole.AcceptCertificate(path);
+                    // Final Page messages
+                    finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
@@ -376,6 +377,12 @@ namespace CertReqClient
             finalPageTxt.Text = finalPageMessage;
             lbl_installCompleted.Text = installFinished;
         }
+
+
+        private void btnCloseApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }  
 
         private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
         {
