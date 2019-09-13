@@ -376,8 +376,6 @@ namespace CertReqClient
             finalPageTxt.Text = finalPageMessage;
             lbl_installCompleted.Text = installFinished;
         }
-    }
-}
 
         private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
         {
@@ -386,3 +384,5 @@ namespace CertReqClient
         }
     }
 }
+
+        
