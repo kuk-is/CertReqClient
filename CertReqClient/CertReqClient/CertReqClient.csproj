@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertificateHandler.cs" />
     <Compile Include="CertificateRequest.cs" />
     <Compile Include="certreqConsole.cs" />
     <Compile Include="Form1.cs">
@@ -98,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="comboBox_country\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TemplateExtensionsPat.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -45,12 +45,17 @@ namespace CertReqClient
                 IEnumerable<string> specialCharacters = GetSpecialCharacter(myRequest);
                 if (specialCharacters.Count() <= 0)
                 {
+                    // Creates request file and return path
                     string path = SaveCsrFile(myConsole, myRequest);
+                    myConsole.CreateInfCommand(path);
+
                     // calling method for console commands
                     myConsole.SubmitCertificate(path);
                     myConsole.AcceptCertificate(path);
+
                     // Final Page messages
                     finalPageMessage();
+
                     // switch to next Tab
                     goToNextPage("tabPage4");
                 }
@@ -70,7 +75,7 @@ namespace CertReqClient
         {
             CertificateRequest myRequest = new CertificateRequest();
             myRequest.CommonName = textBox_commonName.Text;
-            myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;            
+            myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
             myRequest.Organization = textbox_organization.Text;
             myRequest.Department = textBox_Department.Text;
             myRequest.City = textBox_City.Text;
@@ -83,22 +88,22 @@ namespace CertReqClient
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FileName = filename + ".txt";
+            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FileName = filename + ".inf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
             return saveFileDialog1;
         }
 
-        private string CreateCsrFile(CertificateRequest myRequest, SaveFileDialog saveFileDialog1, CertificateHandler myCerHandler)
+        private string CreateCsrFile(CertificateRequest myRequest, SaveFileDialog saveFileDialog1)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
                 // Create Request File
-                CreateFile(myRequest, myCerHandler, filename);
+                CreateFile(filename, CreateInfFileContent(myRequest));
 
                 // create full path for console commands
                 string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
@@ -115,7 +120,7 @@ namespace CertReqClient
             comboBox_country.ValueMember = "Key";
 
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(culture => culture.EnglishName);
-            
+
             Dictionary<string, string> countries = new Dictionary<string, string>();
             countries.Add("", "");
 
@@ -131,7 +136,7 @@ namespace CertReqClient
             comboBox_country.DataSource = new BindingSource(countries, null);
             comboBox_country.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-            
+
         private void addSanBtn_Click(object sender, EventArgs e)
         {
             //if (subjectTypeInput.Text != "" )
@@ -162,7 +167,7 @@ namespace CertReqClient
 
         private HashSet<string> GetSpecialCharacter(CertificateRequest myRequest)
         {
-            string[] specialChars = new string[] { "+", ",", "\"", ";"};
+            string[] specialChars = new string[] { "+", ",", "\"", ";" };
             HashSet<string> charsIn = new HashSet<string>();
             string[] inputFields = new string[]
             {
@@ -213,7 +218,7 @@ namespace CertReqClient
                 else
                 {
                     string specialChar = string.Join("", specialCharacters);
-                    MessageBox.Show(messages.charactersNotAllowed, specialChar);
+                    MessageBox.Show(String.Format(messages.charactersNotAllowed, specialChar));
                 }
             }
             else
@@ -239,7 +244,7 @@ namespace CertReqClient
             tb_overview_department.Text = myRequest.Department;
             tb_overview_city.Text = myRequest.City;
             tb_overview_state.Text = myRequest.State;
-            
+
             tb_overview_country.Text = ((KeyValuePair<string, string>)comboBox_country.SelectedItem).Value;
         }
 
@@ -255,6 +260,7 @@ namespace CertReqClient
             createPrivateKeyBtn.Visible = false;
             CertificateRequest myRequest = ReadInputValues();
             string path = SaveCsrFile(myConsole, myRequest);
+            myConsole.CreateInfCommand(path);
 
             if (!string.IsNullOrWhiteSpace(path))
             {
@@ -263,7 +269,6 @@ namespace CertReqClient
                 {
                     // switch to next Tab
                     goToNextPage("tabPage3");
-                    string privateInfoTxt = "Your file has been successfully created. You can now choose the right certificate \r request file (csr) to generate the private key.";
                     lb_clickPrivateKeyBtn.Text = "";
                     lbl_selectedCsrFile.Text = "";
                     lbl_info_private_key.Text = messages.privateKeyMessage;
@@ -284,8 +289,7 @@ namespace CertReqClient
                 SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
 
                 // Returns path for Console Class
-                CertificateHandler myCerHandler = new CertificateHandler();
-                path = CreateCsrFile(myRequest, saveFileDialog, myCerHandler);
+                path = CreateCsrFile(myRequest, saveFileDialog);
             }
 
             return path;
@@ -302,7 +306,7 @@ namespace CertReqClient
                 createPrivateKeyBtn.Visible = true;
             }
         }
-        
+
         private void createPrivateKeyBtn_Click(object sender, EventArgs e)
         {
             string path = Path.Combine(Path.GetDirectoryName(lbl_selectedCsrFile.Text), Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text));
@@ -335,7 +339,7 @@ namespace CertReqClient
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "Text files (*.txt)|*.txt";
+            openFileDialog1.Filter = "Text file (*.txt)|*.txt";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
 
@@ -370,7 +374,8 @@ namespace CertReqClient
         }
 
 
-        private void finalPageMessage() {
+        private void finalPageMessage()
+        {
 
             string installFinished = "Installation Completed!";
             string finalPageMessage = "Your certificate has been successfully installed. \nYou can now close the installation wizard.";
@@ -381,15 +386,64 @@ namespace CertReqClient
 
         private void btnCloseApp_Click(object sender, EventArgs e)
         {
+            // Function to close the App
             Application.Exit();
-        }  
+        }
 
-        private void CreateFile(CertificateRequest myRequest, CertificateHandler myCerHandler, string filename)
+        private void CreateFile(string filename, string fileContent)
         {
-            var request = myCerHandler.GenerateSigningRequest(myRequest);
-            File.WriteAllText(filename, request);
+            // creating the file
+            File.WriteAllText(filename, fileContent);
+        }
+
+
+        private string CreateInfFileContent(CertificateRequest myRequest)
+        {
+            string CertificateSubject = String.Format("Subject = \"C={0}, O={1}, CN={2}, OU={3}, L={4}, S={5}\"",
+                myRequest.Country,
+                myRequest.Organization,
+                myRequest.CommonName,
+                myRequest.Department,
+                myRequest.City,
+                myRequest.State
+                );
+
+            string dns = "";
+            string ip = "";
+            int dnsCounter = 0;
+            int ipCounter = 0;
+
+            foreach (string sanName in myRequest.SubjectAlternativeNames)
+            {
+                if (sanName.StartsWith("dns", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    string cleanSanDNS = sanName.Replace(messages.dnsEquals, string.Empty);
+                    dns += String.Format("_continue_ = \"dns={0}&\"", cleanSanDNS) + "\r\n";
+                    dnsCounter++;
+                }
+                else if (sanName.StartsWith("ipaddress", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    string cleanSanIp = sanName.Replace(messages.ipaddressEquals, string.Empty);
+                    ip += String.Format("_continue_ = \"IPAddress={0}&\"", cleanSanIp) + "\r\n";
+                    ipCounter++;
+                }
+
+            }
+            
+            string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template.txt");
+            string template = File.ReadAllText(templatePath);
+            template = String.Format(template, CertificateSubject, "{text}", dns, ip);
+                        
+            /*
+            template = String.Format(template, CertificateSubject);
+
+            string templateExtensionPat = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateExtensionsPat.txt");
+            string templateExtension = File.ReadAllText(templateExtensionPat);
+            templateExtension = String.Format(templateExtension, "{text}", dns, ip);
+            */
+
+            return template;
         }
     }
 }
 
-        
