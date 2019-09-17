@@ -432,17 +432,21 @@ namespace CertReqClient
             
             string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template.txt");
             string template = File.ReadAllText(templatePath);
-            template = String.Format(template, CertificateSubject, "{text}", dns, ip);
-                        
-            /*
             template = String.Format(template, CertificateSubject);
+                        
+            string fullTemplate = template;
 
-            string templateExtensionPat = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateExtensionsPat.txt");
-            string templateExtension = File.ReadAllText(templateExtensionPat);
-            templateExtension = String.Format(templateExtension, "{text}", dns, ip);
-            */
+            if (dnsCounter > 0 || ipCounter > 0)
+            {
+                string templateExtensionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateExtension.txt");
+                string templateExtension = File.ReadAllText(templateExtensionPath);
+                templateExtension = String.Format(templateExtension, "{text}", dns, ip);
 
-            return template;
+                fullTemplate = template + templateExtension;
+            }
+            
+
+            return fullTemplate;
         }
     }
 }
