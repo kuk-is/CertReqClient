@@ -383,7 +383,6 @@ namespace CertReqClient
             lbl_installCompleted.Text = installFinished;
         }
 
-
         private void btnCloseApp_Click(object sender, EventArgs e)
         {
             // Function to close the App
