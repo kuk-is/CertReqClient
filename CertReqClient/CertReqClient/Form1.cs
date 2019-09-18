@@ -81,6 +81,7 @@ namespace CertReqClient
             myRequest.City = textBox_City.Text;
             myRequest.State = textBox_State.Text;
             myRequest.Country = comboBox_country.SelectedValue.ToString();
+
             return myRequest;
         }
 
@@ -428,8 +429,9 @@ namespace CertReqClient
                 }
 
             }
-            
+
             string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template.txt");
+            //string templatePath = Path.Combine(@"C: \Users\tfsadmin\Desktop\SSL", "Template.txt");
             string template = File.ReadAllText(templatePath);
             template = String.Format(template, CertificateSubject);
                         
@@ -437,13 +439,13 @@ namespace CertReqClient
 
             if (dnsCounter > 0 || ipCounter > 0)
             {
-                string templateExtensionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateExtension.txt");
+            string templateExtensionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateExtension.txt");
+            //string templateExtensionPath = Path.Combine(@"C: \Users\tfsadmin\Desktop\SSL", "TemplateExtension.txt");
                 string templateExtension = File.ReadAllText(templateExtensionPath);
                 templateExtension = String.Format(templateExtension, "{text}", dns, ip);
 
                 fullTemplate = template + templateExtension;
             }
-            
 
             return fullTemplate;
         }
