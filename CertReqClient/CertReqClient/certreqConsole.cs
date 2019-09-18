@@ -12,7 +12,6 @@ namespace CertReqClient
 
             ProNew.StartInfo.FileName = "certreq.exe";
             ProNew.StartInfo.Arguments = string.Format("-new {0}.inf {0}.req", path);
-            ProNew.StartInfo.Verb = "runas";
             ProNew.Start();
             ProNew.WaitForExit();
 
@@ -26,7 +25,6 @@ namespace CertReqClient
 
             ProSubmit.StartInfo.FileName = "certreq.exe";
             ProSubmit.StartInfo.Arguments = string.Format("-submit -attrib \"CertificateTemplate: webserver\" {0}.req {0}.cer  {0}.pfx", path);
-            ProSubmit.StartInfo.Verb = "runas";
             ProSubmit.Start();
             ProSubmit.WaitForExit();
 
@@ -40,7 +38,6 @@ namespace CertReqClient
 
             ProAccept.StartInfo.FileName = "certreq.exe";
             ProAccept.StartInfo.Arguments = string.Format("-accept {0}.cer", path);
-            ProAccept.StartInfo.Verb = "runas";
             ProAccept.Start();
             ProAccept.WaitForExit();
 
