@@ -103,6 +103,7 @@ namespace CertReqClient
             {
                 // Code to write the stream goes here.
                 string filename = saveFileDialog1.FileName;
+
                 // Create Request File
                 CreateFile(filename, CreateInfFileContent(myRequest));
 
@@ -168,7 +169,7 @@ namespace CertReqClient
 
         private HashSet<string> GetSpecialCharacter(CertificateRequest myRequest)
         {
-            string[] specialChars = new string[] { "+", ",", "\"", ";" };
+            string[] specialChars = new string[] { "+", ",", "\"", ";", "ä", "ö", "ü", "ß" };
             HashSet<string> charsIn = new HashSet<string>();
             string[] inputFields = new string[]
             {
