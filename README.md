@@ -44,18 +44,26 @@ Note: Do not confuse the server's private key with the session key. This is a sy
 The 2048-bit SSL certificate and private key (server) is called an asymmetrical key pair. This means that one key is used to encrypt data (the public key/SSL certificate) and the other is used to decrypt data (the private key stored on the server).
 
 
+## How to get a certificate by using the application? ##
 
-**How to get an SSL certificate?**
+* Actually there are two ways of creating the certificate. The fast way, the one that creates the certificate fully automatic by just one click and the other way that installs the certificate step by step. It's up to you which way you choose. At the end, both will be certifying your webpage.
 
-* To apply for SSL, you must create a registration request (CSR) and send it to the certification authority (CA). The tool      provided by us simplifies the procedure considerably. This is the certificate of installation of the SSL Certificate to install.
 
-  1.) Please fill out the fields for "Domain: / Subject Alternative Names: / Organization: /	Department: / City: / State: / Country: /"
+  **Fully automatic installation**
+
+* First of all, please fill out all necessary fields before clicking the "fully automatic installation" button. Nevertheless the application informs you about the mandatory fields even about the chars that are not accepted by the system. Clicking the "fully automatic installation" Button will now immediately do all necessary steps to install the certificate on your website in just a few seconds. It creates the request file, the private key and the certificate file.
+
+* You should now be able to see the certificate in your Internet Information Services(IIS).
+
+* Installation completed!
+
+
+  **Installation step by step**
   
+* First of all, please fill out all necessary fields before clicking the "generate csr" button. Nevertheless the application informs you about the mandatory fields even about the chars that are not accepted by the system. Clicking the "generate csr" Button now will give you a summary about the data you entered and the possibility to go back if some input is wrong.
+* Clicking the "create certificate file" Button will ask you where to safe the .inf file. At the same time a .req file (Request File) will be created too.
+* After successfully creating the request file the application will be asking you whether you want to create the private key or not. Click "yes" for continuing the process or "no" to exit the program.
+* To continue the process you have now to choose the desired request file (.req file) so that the private key (.pfx file) and the certificate (.cer file) can be created.
+* Again, you can now choose to stop here e.g. if the certificate should not be finalized yet or go further on which is to finalize the installation of the certificate that lists this new certificate in your Internet Information Services.
 
-* Attention: It is especially important that you enter the really correct address for "Domain", which should later be certified.
-
-  2.) Now click on "create and install csr" to install the certificate.
-
-  Here we spare you the step, to send the request manually to the internal CA and to 	start the command line as administrator such as to have to call the following 	commands... certreq -submit -attrib "CertificateTemplate: webserver" <filename 	from 2.> <certificate name> .cer <private name Key> .pfx and the subsequent import 	of the certificates with the command certreq -accept <certificate name> .cer no 	longer need you, because the program was designed so that the command input in 	the background is automatic.
-
-  3.) You will be asked to enter a file name and the path where the security certificate should be stored. The certificate ends in .cer
+* Installation completed!
