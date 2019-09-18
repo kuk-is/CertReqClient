@@ -14,7 +14,6 @@ namespace CertReqClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new lblname());
-
         }
     }
 }

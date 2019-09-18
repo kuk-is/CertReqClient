@@ -197,7 +197,6 @@ namespace CertReqClient
             return charsIn;
         }
 
-
         private void editSAN_Click(object sender, EventArgs e)
         {
             editSAN.Text = textbox_alternativeNames.Enabled ? messages.editSan : messages.closeEditMode;
@@ -249,7 +248,6 @@ namespace CertReqClient
 
             tb_overview_country.Text = ((KeyValuePair<string, string>)comboBox_country.SelectedItem).Value;
         }
-
 
         private void overviewBackBtn_Click(object sender, EventArgs e)
         {
@@ -369,12 +367,10 @@ namespace CertReqClient
             tb_overview_country.Enabled = false;
         }
 
-
         private void goToNextPage(string tabNumber)
         {
             tabControl1.SelectTab(tabNumber);
         }
-
 
         private void finalPageMessage()
         {
@@ -396,7 +392,6 @@ namespace CertReqClient
             // creating the file
             File.WriteAllText(filename, fileContent);
         }
-
 
         private string CreateInfFileContent(CertificateRequest myRequest)
         {
@@ -428,7 +423,6 @@ namespace CertReqClient
                     ip += String.Format("_continue_ = \"IPAddress={0}&\"", cleanSanIp) + "\r\n";
                     ipCounter++;
                 }
-
             }
 
             string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template.txt");

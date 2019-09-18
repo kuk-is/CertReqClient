@@ -5,7 +5,6 @@ namespace CertReqClient
 {
     class CertificateRequest
     {
-
         public string CommonName { get; set; }
         public string Organization { get; set; }
         public string Department { get; set; }
