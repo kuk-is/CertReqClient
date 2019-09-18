@@ -11,7 +11,7 @@ namespace CertReqClient
             Process ProNew = new Process();
 
             ProNew.StartInfo.FileName = "certreq.exe";
-            ProNew.StartInfo.Arguments = string.Format("-new {0}.inf {0}.txt", path);
+            ProNew.StartInfo.Arguments = string.Format("-new {0}.inf {0}.req", path);
             ProNew.StartInfo.Verb = "runas";
             ProNew.Start();
             ProNew.WaitForExit();
@@ -25,7 +25,7 @@ namespace CertReqClient
             Process ProSubmit = new Process();
 
             ProSubmit.StartInfo.FileName = "certreq.exe";
-            ProSubmit.StartInfo.Arguments = string.Format("-submit -attrib \"CertificateTemplate: webserver\" {0}.txt {0}.cer  {0}.pfx", path);
+            ProSubmit.StartInfo.Arguments = string.Format("-submit -attrib \"CertificateTemplate: webserver\" {0}.req {0}.cer  {0}.pfx", path);
             ProSubmit.StartInfo.Verb = "runas";
             ProSubmit.Start();
             ProSubmit.WaitForExit();
