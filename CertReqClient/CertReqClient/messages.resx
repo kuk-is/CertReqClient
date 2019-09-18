@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="certificateFileNotCreated" xml:space="preserve">
-    <value>MessageBox.Show(messages.certificateFileNotCreated.</value>
+    <value>Certficate file could not be created</value>
   </data>
   <data name="charactersNotAllowed" xml:space="preserve">
     <value>The following Characters are not allowed: {0}</value>
@@ -127,10 +127,11 @@
     <value>close edit mode</value>
   </data>
   <data name="crtPrivateKey" xml:space="preserve">
-    <value>You can now create the private key by clicking the \"create private key\" Button.</value>
+    <value>You can now create the private key by clicking the "create private key" Button.</value>
   </data>
   <data name="csrCreated" xml:space="preserve">
-    <value>File has been successfully created!\r Do you want to create the private key now?</value>
+    <value>The request file has been successfully created! 
+Do you want to create the private key now?</value>
   </data>
   <data name="dnsEquals" xml:space="preserve">
     <value>dns=</value>
@@ -145,7 +146,8 @@
     <value>Please enter the Domain.</value>
   </data>
   <data name="installCertificate" xml:space="preserve">
-    <value>The private key file has been successfully created!\r Do you want to install the certificate now?</value>
+    <value>The private key file has been successfully created!
+Do you want to install the certificate now?</value>
   </data>
   <data name="ipAddress" xml:space="preserve">
     <value>IP-Address</value>
@@ -158,6 +160,6 @@
   </data>
   <data name="privateKeyMessage" xml:space="preserve">
     <value>Your file has been successfully created. You can now choose the right certificate
-request file (csr) to generate the private key.</value>
+request file (.txt file) to generate the private key.</value>
   </data>
 </root>

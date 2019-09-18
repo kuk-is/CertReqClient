@@ -80,9 +80,9 @@
             this.openCsrFileBtn = new System.Windows.Forms.Button();
             this.lbl_info_private_key = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.finalPageTxt = new System.Windows.Forms.Label();
-            this.lbl_installCompleted = new System.Windows.Forms.Label();
             this.btnCloseApp = new System.Windows.Forms.Button();
+            this.lbl_installCompleted = new System.Windows.Forms.Label();
+            this.finalPageTxt = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -592,14 +592,15 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             // 
-            // finalPageTxt
+            // btnCloseApp
             // 
-            this.finalPageTxt.AutoSize = true;
-            this.finalPageTxt.Location = new System.Drawing.Point(47, 82);
-            this.finalPageTxt.Name = "finalPageTxt";
-            this.finalPageTxt.Size = new System.Drawing.Size(41, 13);
-            this.finalPageTxt.TabIndex = 0;
-            this.finalPageTxt.Text = "label17";
+            this.btnCloseApp.Location = new System.Drawing.Point(50, 155);
+            this.btnCloseApp.Name = "btnCloseApp";
+            this.btnCloseApp.Size = new System.Drawing.Size(107, 29);
+            this.btnCloseApp.TabIndex = 6;
+            this.btnCloseApp.Text = "close application";
+            this.btnCloseApp.UseVisualStyleBackColor = true;
+            this.btnCloseApp.Click += new System.EventHandler(this.btnCloseApp_Click);
             // 
             // lbl_installCompleted
             // 
@@ -611,15 +612,14 @@
             this.lbl_installCompleted.TabIndex = 1;
             this.lbl_installCompleted.Text = "label18";
             // 
-            // btnCloseApp
+            // finalPageTxt
             // 
-            this.btnCloseApp.Location = new System.Drawing.Point(50, 155);
-            this.btnCloseApp.Name = "btnCloseApp";
-            this.btnCloseApp.Size = new System.Drawing.Size(107, 29);
-            this.btnCloseApp.TabIndex = 6;
-            this.btnCloseApp.Text = "close application";
-            this.btnCloseApp.UseVisualStyleBackColor = true;
-            this.btnCloseApp.Click += new System.EventHandler(this.btnCloseApp_Click);
+            this.finalPageTxt.AutoSize = true;
+            this.finalPageTxt.Location = new System.Drawing.Point(47, 82);
+            this.finalPageTxt.Name = "finalPageTxt";
+            this.finalPageTxt.Size = new System.Drawing.Size(41, 13);
+            this.finalPageTxt.TabIndex = 0;
+            this.finalPageTxt.Text = "label17";
             // 
             // lblname
             // 

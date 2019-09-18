@@ -19,7 +19,7 @@ namespace CertReqClient {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class messages {
@@ -61,7 +61,7 @@ namespace CertReqClient {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die MessageBox.Show(messages.certificateFileNotCreated. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Certficate file could not be created ähnelt.
         /// </summary>
         internal static string certificateFileNotCreated {
             get {
@@ -88,7 +88,7 @@ namespace CertReqClient {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You can now create the private key by clicking the \&quot;create private key\&quot; Button. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You can now create the private key by clicking the &quot;create private key&quot; Button. ähnelt.
         /// </summary>
         internal static string crtPrivateKey {
             get {
@@ -97,7 +97,8 @@ namespace CertReqClient {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die File has been successfully created!\r Do you want to create the private key now? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The request file has been successfully created! 
+        ///Do you want to create the private key now? ähnelt.
         /// </summary>
         internal static string csrCreated {
             get {
@@ -142,7 +143,8 @@ namespace CertReqClient {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The private key file has been successfully created!\r Do you want to install the certificate now? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The private key file has been successfully created!
+        ///Do you want to install the certificate now? ähnelt.
         /// </summary>
         internal static string installCertificate {
             get {
@@ -179,7 +181,7 @@ namespace CertReqClient {
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Your file has been successfully created. You can now choose the right certificate
-        ///request file (csr) to generate the private key. ähnelt.
+        ///request file (.txt file) to generate the private key. ähnelt.
         /// </summary>
         internal static string privateKeyMessage {
             get {
