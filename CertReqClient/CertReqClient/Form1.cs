@@ -260,22 +260,21 @@ namespace CertReqClient
             createPrivateKeyBtn.Visible = false;
             CertificateRequest myRequest = ReadInputValues();
             string path = SaveCsrFile(myConsole, myRequest);
-            myConsole.CreateInfCommand(path);
 
-            if (!string.IsNullOrWhiteSpace(path))
+            if (path != null)
             {
-                DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.Yes)
+                myConsole.CreateInfCommand(path);
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    // switch to next Tab
-                    goToNextPage("tabPage3");
-                    lb_clickPrivateKeyBtn.Text = "";
-                    lbl_selectedCsrFile.Text = "";
-                    lbl_info_private_key.Text = messages.privateKeyMessage;
-                }
-                else
-                {
-                    Application.Exit();
+                    DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        // switch to next Tab
+                        goToNextPage("tabPage3");
+                        lb_clickPrivateKeyBtn.Text = "";
+                        lbl_selectedCsrFile.Text = "";
+                        lbl_info_private_key.Text = messages.privateKeyMessage;
+                    }
                 }
             }
         }
@@ -325,10 +324,6 @@ namespace CertReqClient
                     finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
-                }
-                else
-                {
-                    Application.Exit();
                 }
             }
             else
