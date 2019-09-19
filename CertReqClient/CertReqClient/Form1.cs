@@ -78,6 +78,7 @@ namespace CertReqClient
         private CertificateRequest ReadInputValues()
         {
             CertificateRequest myRequest = new CertificateRequest();
+
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
             myRequest.Organization = textbox_organization.Text;
@@ -238,7 +239,7 @@ namespace CertReqClient
 
             // set textboxes to ReadOnly
             SetTbReadOnly();
-
+            
             tb_overview_domain.Text = myRequest.CommonName;
             tb_subAltNames.Text = myRequest.SubjectAlternativeName;
             tb_overview_organization.Text = myRequest.Organization;
