@@ -40,6 +40,9 @@
       <HintPath>..\packages\Interop.CERTENROLLLib.Unofficial.1.0.0\lib\Interop.CERTENROLLLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="MessageBoxManager">
+      <HintPath>..\..\..\..\..\Desktop\SSL Projekt\quisy\MessageBoxManager.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

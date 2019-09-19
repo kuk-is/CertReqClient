@@ -47,17 +47,21 @@ namespace CertReqClient
                 {
                     // Creates request file and return path
                     string path = SaveCsrFile(myConsole, myRequest);
-                    myConsole.CreateInfCommand(path);
 
-                    // calling method for console commands
-                    myConsole.SubmitCertificate(path);
-                    myConsole.AcceptCertificate(path);
+                    if (path != null)
+                    {
+                        myConsole.CreateInfCommand(path);
 
-                    // Final Page messages
-                    finalPageMessage();
+                        // calling method for console commands
+                        myConsole.SubmitCertificate(path);
+                        myConsole.AcceptCertificate(path);
 
-                    // switch to next Tab
-                    goToNextPage("tabPage4");
+                        // Final Page messages
+                        finalPageMessage();
+
+                        // switch to next Tab
+                        goToNextPage("tabPage4");
+                    }
                 }
                 else
                 {
@@ -74,6 +78,7 @@ namespace CertReqClient
         private CertificateRequest ReadInputValues()
         {
             CertificateRequest myRequest = new CertificateRequest();
+
             myRequest.CommonName = textBox_commonName.Text;
             myRequest.SubjectAlternativeName = textbox_alternativeNames.Text;
             myRequest.Organization = textbox_organization.Text;
@@ -99,20 +104,16 @@ namespace CertReqClient
 
         private string CreateCsrFile(CertificateRequest myRequest, SaveFileDialog saveFileDialog1)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                // Code to write the stream goes here.
-                string filename = saveFileDialog1.FileName;
+            // Code to write the stream goes here.
+            string filename = saveFileDialog1.FileName;
 
-                // Create Request File
-                CreateFile(filename, CreateInfFileContent(myRequest));
+            // Create Request File
+            CreateFile(filename, CreateInfFileContent(myRequest));
 
-                // create full path for console commands
-                string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
+            // create full path for console commands
+            string path = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
 
-                return path;
-            }
-            return null;
+            return path;
         }
 
         private void FillCountryDropDown()
@@ -238,7 +239,7 @@ namespace CertReqClient
 
             // set textboxes to ReadOnly
             SetTbReadOnly();
-
+            
             tb_overview_domain.Text = myRequest.CommonName;
             tb_subAltNames.Text = myRequest.SubjectAlternativeName;
             tb_overview_organization.Text = myRequest.Organization;
@@ -260,22 +261,21 @@ namespace CertReqClient
             createPrivateKeyBtn.Visible = false;
             CertificateRequest myRequest = ReadInputValues();
             string path = SaveCsrFile(myConsole, myRequest);
-            myConsole.CreateInfCommand(path);
 
-            if (!string.IsNullOrWhiteSpace(path))
+            if (path != null)
             {
-                DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.Yes)
+                myConsole.CreateInfCommand(path);
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    // switch to next Tab
-                    goToNextPage("tabPage3");
-                    lb_clickPrivateKeyBtn.Text = "";
-                    lbl_selectedCsrFile.Text = "";
-                    lbl_info_private_key.Text = messages.privateKeyMessage;
-                }
-                else
-                {
-                    Application.Exit();
+                    DialogResult dialogResult = MessageBox.Show(messages.csrCreated, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        // switch to next Tab
+                        goToNextPage("tabPage3");
+                        lb_clickPrivateKeyBtn.Text = "";
+                        lbl_selectedCsrFile.Text = "";
+                        lbl_info_private_key.Text = messages.privateKeyMessage;
+                    }
                 }
             }
         }
@@ -288,10 +288,12 @@ namespace CertReqClient
                 // Define Settings for SaveFileDialog
                 SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
 
-                // Returns path for Console Class
-                path = CreateCsrFile(myRequest, saveFileDialog);
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Returns path for Console Class
+                    path = CreateCsrFile(myRequest, saveFileDialog);
+                }
             }
-
             return path;
         }
 
@@ -323,10 +325,6 @@ namespace CertReqClient
                     finalPageMessage();
                     // switch to next Tab
                     goToNextPage("tabPage4");
-                }
-                else
-                {
-                    Application.Exit();
                 }
             }
             else
