@@ -147,7 +147,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(480, 600);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "certificate form";
+            this.tabPage1.Text = "Certificate Form";
             // 
             // generateCsrBtn
             // 
@@ -155,7 +155,7 @@
             this.generateCsrBtn.Name = "generateCsrBtn";
             this.generateCsrBtn.Size = new System.Drawing.Size(145, 31);
             this.generateCsrBtn.TabIndex = 28;
-            this.generateCsrBtn.Text = "generate csr";
+            this.generateCsrBtn.Text = "Generate CSR";
             this.generateCsrBtn.UseVisualStyleBackColor = true;
             this.generateCsrBtn.Click += new System.EventHandler(this.generateCsrBtn_Click);
             // 
@@ -165,7 +165,7 @@
             this.editSAN.Name = "editSAN";
             this.editSAN.Size = new System.Drawing.Size(217, 23);
             this.editSAN.TabIndex = 27;
-            this.editSAN.Text = "edit SAN";
+            this.editSAN.Text = "Edit SAN";
             this.editSAN.UseVisualStyleBackColor = true;
             this.editSAN.Click += new System.EventHandler(this.editSAN_Click);
             // 
@@ -184,7 +184,7 @@
             this.addSanBtn.Name = "addSanBtn";
             this.addSanBtn.Size = new System.Drawing.Size(217, 23);
             this.addSanBtn.TabIndex = 25;
-            this.addSanBtn.Text = "add SAN";
+            this.addSanBtn.Text = "Add SAN";
             this.addSanBtn.UseVisualStyleBackColor = true;
             this.addSanBtn.Click += new System.EventHandler(this.addSanBtn_Click);
             // 
@@ -235,7 +235,7 @@
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(145, 31);
             this.btn_generate.TabIndex = 17;
-            this.btn_generate.Text = "full automated installation";
+            this.btn_generate.Text = "Fully Automatic Installation";
             this.btn_generate.UseVisualStyleBackColor = true;
             this.btn_generate.Click += new System.EventHandler(this.Btn_generate_Click);
             // 
@@ -359,7 +359,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(480, 600);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "certificate overview";
+            this.tabPage2.Text = "Certificate Overview";
             // 
             // tb_overview_country
             // 
@@ -415,7 +415,7 @@
             this.crtCsrFile.Name = "crtCsrFile";
             this.crtCsrFile.Size = new System.Drawing.Size(145, 31);
             this.crtCsrFile.TabIndex = 30;
-            this.crtCsrFile.Text = "create certificate file";
+            this.crtCsrFile.Text = "Create Certificate File";
             this.crtCsrFile.UseVisualStyleBackColor = true;
             this.crtCsrFile.Click += new System.EventHandler(this.crtCsrFile_Click);
             // 
@@ -425,7 +425,7 @@
             this.overviewBackBtn.Name = "overviewBackBtn";
             this.overviewBackBtn.Size = new System.Drawing.Size(145, 31);
             this.overviewBackBtn.TabIndex = 29;
-            this.overviewBackBtn.Text = "< back";
+            this.overviewBackBtn.Text = "< Back";
             this.overviewBackBtn.UseVisualStyleBackColor = true;
             this.overviewBackBtn.Click += new System.EventHandler(this.overviewBackBtn_Click);
             // 
@@ -531,7 +531,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(480, 600);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "create certificate files";
+            this.tabPage3.Text = "Create certificate Files";
             // 
             // createPrivateKeyBtn
             // 
@@ -539,7 +539,7 @@
             this.createPrivateKeyBtn.Name = "createPrivateKeyBtn";
             this.createPrivateKeyBtn.Size = new System.Drawing.Size(107, 29);
             this.createPrivateKeyBtn.TabIndex = 5;
-            this.createPrivateKeyBtn.Text = "create private key";
+            this.createPrivateKeyBtn.Text = "Create Private Key";
             this.createPrivateKeyBtn.UseVisualStyleBackColor = true;
             this.createPrivateKeyBtn.Click += new System.EventHandler(this.createPrivateKeyBtn_Click);
             // 
@@ -567,7 +567,7 @@
             this.openCsrFileBtn.Name = "openCsrFileBtn";
             this.openCsrFileBtn.Size = new System.Drawing.Size(107, 29);
             this.openCsrFileBtn.TabIndex = 2;
-            this.openCsrFileBtn.Text = "choose csr file";
+            this.openCsrFileBtn.Text = "Choose CSR File";
             this.openCsrFileBtn.UseVisualStyleBackColor = true;
             this.openCsrFileBtn.Click += new System.EventHandler(this.openCsrFileBtn_Click);
             // 
@@ -590,7 +590,7 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(480, 600);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "finish installation";
+            this.tabPage4.Text = "Finish Installation";
             // 
             // btnCloseApp
             // 
@@ -598,7 +598,7 @@
             this.btnCloseApp.Name = "btnCloseApp";
             this.btnCloseApp.Size = new System.Drawing.Size(107, 29);
             this.btnCloseApp.TabIndex = 6;
-            this.btnCloseApp.Text = "close application";
+            this.btnCloseApp.Text = "Close Application";
             this.btnCloseApp.UseVisualStyleBackColor = true;
             this.btnCloseApp.Click += new System.EventHandler(this.btnCloseApp_Click);
             // 
