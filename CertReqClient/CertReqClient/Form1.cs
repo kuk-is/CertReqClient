@@ -14,6 +14,7 @@ namespace CertReqClient
         public lblname()
         {
             InitializeComponent();
+            //stabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
         }
 
         CertreqConsole myConsole = new CertreqConsole();
@@ -94,7 +95,7 @@ namespace CertReqClient
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "inf files (*.inf)|*.inf|All files (*.*)|*.*";
             saveFileDialog1.FileName = filename + ".inf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
@@ -287,7 +288,7 @@ namespace CertReqClient
             {
                 // Define Settings for SaveFileDialog
                 SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
-
+                
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Returns path for Console Class
@@ -300,7 +301,7 @@ namespace CertReqClient
         private void openCsrFileBtn_Click(object sender, EventArgs e)
         {
             string selectedFileName = GetFileName(OpenFileDiaglog());
-
+            
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
                 lbl_selectedCsrFile.Text = selectedFileName;
@@ -347,8 +348,15 @@ namespace CertReqClient
         private string GetFileName(OpenFileDialog openFileDialog1)
         {
             string selectedFileName = "";
+            
+            /*
+            SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
+            saveFileDialog.RestoreDirectory = true;
+            */
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //restoreDiretory.RestoreDirectory = true;
                 selectedFileName = openFileDialog1.FileName;
             }
 
@@ -440,6 +448,13 @@ namespace CertReqClient
 
             return fullTemplate;
         }
+
+        /*
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            MessageBox.Show("First Tab!");
+        }
+        */
     }
 }
 
