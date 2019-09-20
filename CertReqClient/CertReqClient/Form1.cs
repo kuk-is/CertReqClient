@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace CertReqClient
         public lblname()
         {
             InitializeComponent();
-            //tabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
+
+            // Hiding TabPages
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
         }
 
         CertreqConsole myConsole = new CertreqConsole();
@@ -55,17 +60,26 @@ namespace CertReqClient
 
                         if (path != null)
                         {
-                            myConsole.CreateInfCommand(path);
-
                             // calling method for console commands
+                            myConsole.CreateInfCommand(path);                            
                             myConsole.SubmitCertificate(path);
-                            myConsole.AcceptCertificate(path);
 
-                            // Final Page messages
-                            finalPageMessage();
+                            //Check if file exists
+                            if (File.Exists(path + ".cer"))
+                            {
+                                // Console Command for accepting the certificate
+                                myConsole.AcceptCertificate(path);
 
-                            // switch to next Tab
-                            goToNextPage("tabPage4");
+                                // Final Page messages
+                                finalPageMessage();
+
+                                // switch to next Tab
+                                goToNextPage("tabPage4");
+                            }
+                            else
+                            {
+                                MessageBox.Show(messages.certificateFileNotCreated);
+                            }
                         }
                     }
                     else
@@ -333,11 +347,12 @@ namespace CertReqClient
             }
         }
 
-        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        private void CancelCAPopUp()
         {
             string path = Path.Combine(Path.GetDirectoryName(lbl_selectedCsrFile.Text), Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text));
             // creating the private key
             myConsole.SubmitCertificate(path);
+
             if (File.Exists(path + ".cer"))
             {
                 DialogResult dialogResult = MessageBox.Show(messages.installCertificate, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -355,6 +370,11 @@ namespace CertReqClient
             {
                 MessageBox.Show(messages.certificateFileNotCreated);
             }
+        }
+
+        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        {
+            CancelCAPopUp();
         }
 
         private OpenFileDialog OpenFileDiaglog()
@@ -468,13 +488,6 @@ namespace CertReqClient
 
             return fullTemplate;
         }
-
-        /*
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-        }
-        */
-
         
         public int IncorretSan() {
 
