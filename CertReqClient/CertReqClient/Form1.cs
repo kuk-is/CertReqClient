@@ -14,7 +14,7 @@ namespace CertReqClient
         public lblname()
         {
             InitializeComponent();
-            //stabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
+            //tabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
         }
 
         CertreqConsole myConsole = new CertreqConsole();
@@ -308,11 +308,12 @@ namespace CertReqClient
             {
                 // Define Settings for SaveFileDialog
                 SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
-                
+
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Returns path for Console Class
                     path = CreateCsrFile(myRequest, saveFileDialog);
+                    CertificateRequest.directoryPath = path;
                 }
             }
             return path;
@@ -320,6 +321,8 @@ namespace CertReqClient
 
         private void openCsrFileBtn_Click(object sender, EventArgs e)
         {
+            //CertificateRequest myRequest = new CertificateRequest();
+
             string selectedFileName = GetFileName(OpenFileDiaglog());
             
             if (!String.IsNullOrWhiteSpace(selectedFileName))
@@ -358,6 +361,8 @@ namespace CertReqClient
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = "c:\\";
+
+            openFileDialog1.InitialDirectory = CertificateRequest.directoryPath;
             openFileDialog1.Filter = "Request file (*.req)|*.req";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
@@ -367,16 +372,11 @@ namespace CertReqClient
 
         private string GetFileName(OpenFileDialog openFileDialog1)
         {
+            CertificateRequest myRequest = new CertificateRequest();
             string selectedFileName = "";
-            
-            /*
-            SaveFileDialog saveFileDialog = SaveDialogSettings(myRequest.CommonName);
-            saveFileDialog.RestoreDirectory = true;
-            */
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //restoreDiretory.RestoreDirectory = true;
                 selectedFileName = openFileDialog1.FileName;
             }
 
@@ -472,10 +472,10 @@ namespace CertReqClient
         /*
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            MessageBox.Show("First Tab!");
         }
         */
 
+        
         public int IncorretSan() {
 
             int startsWithCounter = 0;
