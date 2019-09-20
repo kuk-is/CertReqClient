@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace CertReqClient
         public lblname()
         {
             InitializeComponent();
-            //tabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
+
+            // Hiding TabPages
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
         }
 
         CertreqConsole myConsole = new CertreqConsole();
@@ -483,13 +488,6 @@ namespace CertReqClient
 
             return fullTemplate;
         }
-
-        /*
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-        }
-        */
-
         
         public int IncorretSan() {
 
