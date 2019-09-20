@@ -3,7 +3,7 @@
 
 namespace CertReqClient
 {
-    class CertificateRequest
+    public class CertificateRequest
     {
         public string CommonName { get; set; }
         public string Organization { get; set; }
@@ -12,6 +12,7 @@ namespace CertReqClient
         public string State { get; set; }
         public string Country { get; set; }
         public string SubjectAlternativeName { get; set; }
+        public static string directoryPath { get; set; }
 
 
         public string[] SubjectAlternativeNames

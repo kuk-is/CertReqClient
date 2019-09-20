@@ -14,6 +14,7 @@ namespace CertReqClient
         public lblname()
         {
             InitializeComponent();
+            //tabControl1.Selected += new TabControlEventHandler(tabControl1_Selected);
         }
 
         CertreqConsole myConsole = new CertreqConsole();
@@ -41,26 +42,35 @@ namespace CertReqClient
             {
                 // Read all Input Fields
                 CertificateRequest myRequest = ReadInputValues();
-
+                
                 IEnumerable<string> specialCharacters = GetSpecialCharacter(myRequest);
                 if (specialCharacters.Count() <= 0)
                 {
-                    // Creates request file and return path
-                    string path = SaveCsrFile(myConsole, myRequest);
-
-                    if (path != null)
+                    // Check if SAN format ist correct
+                    int startsWithCounter = IncorretSan();
+                    if (startsWithCounter <= 0)
                     {
-                        myConsole.CreateInfCommand(path);
+                        // Creates request file and return path
+                        string path = SaveCsrFile(myConsole, myRequest);
 
-                        // calling method for console commands
-                        myConsole.SubmitCertificate(path);
-                        myConsole.AcceptCertificate(path);
+                        if (path != null)
+                        {
+                            myConsole.CreateInfCommand(path);
 
-                        // Final Page messages
-                        finalPageMessage();
+                            // calling method for console commands
+                            myConsole.SubmitCertificate(path);
+                            myConsole.AcceptCertificate(path);
 
-                        // switch to next Tab
-                        goToNextPage("tabPage4");
+                            // Final Page messages
+                            finalPageMessage();
+
+                            // switch to next Tab
+                            goToNextPage("tabPage4");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(messages.sanFormat);
                     }
                 }
                 else
@@ -94,7 +104,7 @@ namespace CertReqClient
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "inf files (*.inf)|*.inf|All files (*.*)|*.*";
             saveFileDialog1.FileName = filename + ".inf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
@@ -142,7 +152,8 @@ namespace CertReqClient
 
         private void addSanBtn_Click(object sender, EventArgs e)
         {
-            //if (subjectTypeInput.Text != "" )
+            CertificateRequest myRequest = new CertificateRequest();
+
             if (!String.IsNullOrEmpty(subjectTypeInput.Text) && (!String.IsNullOrEmpty(subjectType.Text)))
             {
                 string subjectTypeName = "";
@@ -157,6 +168,7 @@ namespace CertReqClient
                     default:
                         break;
                 }
+
                 textbox_alternativeNames.Text += subjectTypeName + subjectTypeInput.Text + "\r\n";
                 // Clear fields for new input
                 subjectTypeInput.Text = "";
@@ -213,9 +225,18 @@ namespace CertReqClient
 
                 if (specialCharacters.Count() <= 0)
                 {
-                    // switch to next Tab
-                    goToNextPage("tabPage2");
-                    SetDataForOverview();
+                    // Check if SAN format ist correct
+                    int startsWithCounter = IncorretSan();
+                    if (startsWithCounter <= 0)
+                    {
+                        // switch to next Tab
+                        goToNextPage("tabPage2");
+                        SetDataForOverview();
+                    }
+                    else
+                    {
+                        MessageBox.Show(messages.sanFormat);
+                    }
                 }
                 else
                 {
@@ -292,6 +313,7 @@ namespace CertReqClient
                 {
                     // Returns path for Console Class
                     path = CreateCsrFile(myRequest, saveFileDialog);
+                    CertificateRequest.directoryPath = path;
                 }
             }
             return path;
@@ -299,8 +321,10 @@ namespace CertReqClient
 
         private void openCsrFileBtn_Click(object sender, EventArgs e)
         {
-            string selectedFileName = GetFileName(OpenFileDiaglog());
+            //CertificateRequest myRequest = new CertificateRequest();
 
+            string selectedFileName = GetFileName(OpenFileDiaglog());
+            
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
                 lbl_selectedCsrFile.Text = selectedFileName;
@@ -337,6 +361,8 @@ namespace CertReqClient
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = "c:\\";
+
+            openFileDialog1.InitialDirectory = CertificateRequest.directoryPath;
             openFileDialog1.Filter = "Request file (*.req)|*.req";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
@@ -346,7 +372,9 @@ namespace CertReqClient
 
         private string GetFileName(OpenFileDialog openFileDialog1)
         {
+            CertificateRequest myRequest = new CertificateRequest();
             string selectedFileName = "";
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 selectedFileName = openFileDialog1.FileName;
@@ -439,6 +467,40 @@ namespace CertReqClient
             }
 
             return fullTemplate;
+        }
+
+        /*
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+        }
+        */
+
+        
+        public int IncorretSan() {
+
+            int startsWithCounter = 0;
+            for (int i = 0; i < textbox_alternativeNames.Lines.Length; i++)
+            {
+                string msg = textbox_alternativeNames.Text;
+                string[] strarr = msg.Split("\r\n".ToCharArray());
+
+                for (int p = 0; p < strarr.Length; p++)
+                {
+
+                    if (!strarr[p].StartsWith("dns="))
+                    {
+                        if (!strarr[p].StartsWith("ipaddress="))
+                        {
+                            if (strarr[p] != "")
+                            {
+                                startsWithCounter++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return startsWithCounter;
         }
     }
 }
