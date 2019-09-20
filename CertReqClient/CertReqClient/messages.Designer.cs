@@ -188,5 +188,14 @@ namespace CertReqClient {
                 return ResourceManager.GetString("privateKeyMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subject Alternative names either have to start with &quot;dns=&quot; or &quot;ipaddress=&quot; ähnelt.
+        /// </summary>
+        internal static string sanFormat {
+            get {
+                return ResourceManager.GetString("sanFormat", resourceCulture);
+            }
+        }
     }
 }

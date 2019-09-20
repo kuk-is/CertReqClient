@@ -162,4 +162,7 @@ Do you want to install the certificate now?</value>
     <value>Your file has been successfully created. You can now choose the right certificate
 request file (.txt file) to generate the private key.</value>
   </data>
+  <data name="sanFormat" xml:space="preserve">
+    <value>Subject Alternative names either have to start with "dns=" or "ipaddress="</value>
+  </data>
 </root>

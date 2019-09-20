@@ -42,26 +42,35 @@ namespace CertReqClient
             {
                 // Read all Input Fields
                 CertificateRequest myRequest = ReadInputValues();
-
+                
                 IEnumerable<string> specialCharacters = GetSpecialCharacter(myRequest);
                 if (specialCharacters.Count() <= 0)
                 {
-                    // Creates request file and return path
-                    string path = SaveCsrFile(myConsole, myRequest);
-
-                    if (path != null)
+                    // Check if SAN format ist correct
+                    int startsWithCounter = IncorretSan();
+                    if (startsWithCounter <= 0)
                     {
-                        myConsole.CreateInfCommand(path);
+                        // Creates request file and return path
+                        string path = SaveCsrFile(myConsole, myRequest);
 
-                        // calling method for console commands
-                        myConsole.SubmitCertificate(path);
-                        myConsole.AcceptCertificate(path);
+                        if (path != null)
+                        {
+                            myConsole.CreateInfCommand(path);
 
-                        // Final Page messages
-                        finalPageMessage();
+                            // calling method for console commands
+                            myConsole.SubmitCertificate(path);
+                            myConsole.AcceptCertificate(path);
 
-                        // switch to next Tab
-                        goToNextPage("tabPage4");
+                            // Final Page messages
+                            finalPageMessage();
+
+                            // switch to next Tab
+                            goToNextPage("tabPage4");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(messages.sanFormat);
                     }
                 }
                 else
@@ -143,7 +152,8 @@ namespace CertReqClient
 
         private void addSanBtn_Click(object sender, EventArgs e)
         {
-            //if (subjectTypeInput.Text != "" )
+            CertificateRequest myRequest = new CertificateRequest();
+
             if (!String.IsNullOrEmpty(subjectTypeInput.Text) && (!String.IsNullOrEmpty(subjectType.Text)))
             {
                 string subjectTypeName = "";
@@ -158,6 +168,7 @@ namespace CertReqClient
                     default:
                         break;
                 }
+
                 textbox_alternativeNames.Text += subjectTypeName + subjectTypeInput.Text + "\r\n";
                 // Clear fields for new input
                 subjectTypeInput.Text = "";
@@ -214,9 +225,18 @@ namespace CertReqClient
 
                 if (specialCharacters.Count() <= 0)
                 {
-                    // switch to next Tab
-                    goToNextPage("tabPage2");
-                    SetDataForOverview();
+                    // Check if SAN format ist correct
+                    int startsWithCounter = IncorretSan();
+                    if (startsWithCounter <= 0)
+                    {
+                        // switch to next Tab
+                        goToNextPage("tabPage2");
+                        SetDataForOverview();
+                    }
+                    else
+                    {
+                        MessageBox.Show(messages.sanFormat);
+                    }
                 }
                 else
                 {
@@ -455,6 +475,33 @@ namespace CertReqClient
             MessageBox.Show("First Tab!");
         }
         */
+
+        public int IncorretSan() {
+
+            int startsWithCounter = 0;
+            for (int i = 0; i < textbox_alternativeNames.Lines.Length; i++)
+            {
+                string msg = textbox_alternativeNames.Text;
+                string[] strarr = msg.Split("\r\n".ToCharArray());
+
+                for (int p = 0; p < strarr.Length; p++)
+                {
+
+                    if (!strarr[p].StartsWith("dns="))
+                    {
+                        if (!strarr[p].StartsWith("ipaddress="))
+                        {
+                            if (strarr[p] != "")
+                            {
+                                startsWithCounter++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return startsWithCounter;
+        }
     }
 }
 
