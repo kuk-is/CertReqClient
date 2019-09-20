@@ -55,17 +55,26 @@ namespace CertReqClient
 
                         if (path != null)
                         {
-                            myConsole.CreateInfCommand(path);
-
                             // calling method for console commands
+                            myConsole.CreateInfCommand(path);                            
                             myConsole.SubmitCertificate(path);
-                            myConsole.AcceptCertificate(path);
 
-                            // Final Page messages
-                            finalPageMessage();
+                            //Check if file exists
+                            if (File.Exists(path + ".cer"))
+                            {
+                                // Console Command for accepting the certificate
+                                myConsole.AcceptCertificate(path);
 
-                            // switch to next Tab
-                            goToNextPage("tabPage4");
+                                // Final Page messages
+                                finalPageMessage();
+
+                                // switch to next Tab
+                                goToNextPage("tabPage4");
+                            }
+                            else
+                            {
+                                MessageBox.Show(messages.certificateFileNotCreated);
+                            }
                         }
                     }
                     else
@@ -333,11 +342,12 @@ namespace CertReqClient
             }
         }
 
-        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        private void CancelCAPopUp()
         {
             string path = Path.Combine(Path.GetDirectoryName(lbl_selectedCsrFile.Text), Path.GetFileNameWithoutExtension(lbl_selectedCsrFile.Text));
             // creating the private key
             myConsole.SubmitCertificate(path);
+
             if (File.Exists(path + ".cer"))
             {
                 DialogResult dialogResult = MessageBox.Show(messages.installCertificate, "", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -355,6 +365,11 @@ namespace CertReqClient
             {
                 MessageBox.Show(messages.certificateFileNotCreated);
             }
+        }
+
+        private void createPrivateKeyBtn_Click(object sender, EventArgs e)
+        {
+            CancelCAPopUp();
         }
 
         private OpenFileDialog OpenFileDiaglog()
