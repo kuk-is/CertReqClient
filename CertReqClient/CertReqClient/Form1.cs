@@ -471,6 +471,7 @@ namespace CertReqClient
                 }
             }
 
+
             string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Template.txt");
             string template = File.ReadAllText(templatePath);
             template = String.Format(template, CertificateSubject);
