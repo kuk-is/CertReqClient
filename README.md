@@ -67,3 +67,7 @@ The 2048-bit SSL certificate and private key (server) is called an asymmetrical 
 * Again, you can now choose to stop here e.g. if the certificate should not be finalized yet or go further on which is to finalize the installation of the certificate that lists this new certificate in your Internet Information Services.
 
 * Installation completed!
+
+## Where to find the releases? ##
+
+* Click the following link to get the releases: https://github.com/kuk-is/CertReqClient/releases
