@@ -31,7 +31,8 @@ steps:
 
 - task: CopyFiles@1
   inputs:
-    contents: 'bin/**'
+    Contents: |
+      CertReqClient\**\bin\**\*
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: VSTest@2
